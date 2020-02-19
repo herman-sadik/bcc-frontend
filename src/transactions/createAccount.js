@@ -16,10 +16,11 @@ const createAccount = async data => {
   const iTx = invokeScript({
     dApp: "3M7BPTZZgqa6JcXqAg7ZiDB2wuChxAxPtgx",
     call: { function: "createAccount" },
-    payment: [{ assetId: null, amount: 10 }]
-  }, "favorite often like wheel doctor leisure arch share oxygen hobby fantasy sad require embrace man")
+    payment: [{ assetId: null, amount: 0 }],
+    chainId: 82,
+  }, "cactus nice valley siren pigeon image manual script raise can crisp sniff weekend guilt glove")
   console.log(JSON.stringify(iTx))
-  const test = await broadcast(iTx)
+  await broadcast(iTx, 'http://localhost:6869/')
 
 }
 
