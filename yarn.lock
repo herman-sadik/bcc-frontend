@@ -1274,6 +1274,18 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/base64-js@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@types/base64-js/-/base64-js-1.2.5.tgz#582b2476169a6cba460a214d476c744441d873d5"
+  integrity sha1-WCskdhaabLpGCiFNR2x0REHYc9U=
+
+"@types/bignumber.js@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/bignumber.js/-/bignumber.js-5.0.0.tgz#d9f1a378509f3010a3255e9cc822ad0eeb4ab969"
+  integrity sha512-0DH7aPGCClywOFaxxjE6UwpN2kQYe9LwuDQMv+zYA97j5GkOMo8e66LYT+a8JYU7jfmUFRZLa9KycxHDsKXJCA==
+  dependencies:
+    bignumber.js "*"
+
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
@@ -1433,6 +1445,14 @@
     semver "^6.3.0"
     tsutils "^3.17.1"
 
+"@waves/bignumber@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@waves/bignumber/-/bignumber-0.0.1.tgz#b878129008f1076f549aa29f274a499069916ccf"
+  integrity sha512-+bQCa8fPCYdkLtwKsKtgbvDD7MzZTv6bc2ZpGMqn9uq+RjO8Qf4XSrs0DVhtWWhCHplkVIqOeS4bzgW1i3P7rw==
+  dependencies:
+    "@types/bignumber.js" "^5.0.0"
+    bignumber.js "^8.1.1"
+
 "@waves/marshall@0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@waves/marshall/-/marshall-0.1.0.tgz#66b9af25c2e25ee1193e26c0a137de8b2fe10b8c"
@@ -1440,6 +1460,38 @@
   dependencies:
     base64-js "^1.3.0"
     long "^4.0.0"
+
+"@waves/marshall@^0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@waves/marshall/-/marshall-0.9.1.tgz#004d01757b997cf7ad9ef6322823db4779ce526c"
+  integrity sha512-DWBUKDno7ahI4ogMtaTbXujF1j2RoIHK68Xi9ZTd1Tk1FwnSfHXjEnkRLJ7qoRwZibVYmrxiOPN0t+LNkueTnw==
+  dependencies:
+    "@types/base64-js" "^1.2.5"
+    "@waves/bignumber" "0.0.1"
+    "@waves/parse-json-bignumber" "^1.0.1"
+    base64-js "^1.3.0"
+
+"@waves/parse-json-bignumber@^1.0.1":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@waves/parse-json-bignumber/-/parse-json-bignumber-1.0.3.tgz#9d68519abef080019e86433f3840996ebaa48eb3"
+  integrity sha512-zBHIQUjjMYMQXNQcwJwzNShUZnoTM6JfVJDwa0eDGUVk+JAKVGiXxv/k29Ng9TsIDi97hwVravlPPwfZcy4XXQ==
+
+"@waves/ts-lib-crypto@^1.4.1":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@waves/ts-lib-crypto/-/ts-lib-crypto-1.4.2.tgz#c96a88d608a9259468428c57b5ac21e1043d993d"
+  integrity sha512-jRLN26IaqoEIMxvJtO5geOUc18A1JoSuH9wPuw8wfIBjMq8Mw7Y/k3zT+d99lKuaMED9IrDyGX5bdcxe8FFGsQ==
+  dependencies:
+    js-sha3 "^0.8.0"
+    node-forge "^0.8.5"
+
+"@waves/waves-transactions@^3.25.0":
+  version "3.25.0"
+  resolved "https://registry.yarnpkg.com/@waves/waves-transactions/-/waves-transactions-3.25.0.tgz#6472bffae8d83be5f782de0550865b3893679700"
+  integrity sha512-ddo/Go+hd5+0m2qglwhseSXrfhXVN24cx+60xLYD7ojz2Gw2Zk4cLU9ikXrCRPTk/qRvMFiWwlsaVPCGpB4QGg==
+  dependencies:
+    "@waves/marshall" "^0.9.1"
+    "@waves/ts-lib-crypto" "^1.4.1"
+    axios "^0.19.0"
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
@@ -1970,6 +2022,13 @@ axios@^0.18.0:
     follow-redirects "1.5.10"
     is-buffer "^2.0.2"
 
+axios@^0.19.0:
+  version "0.19.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
+  integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
+  dependencies:
+    follow-redirects "1.5.10"
+
 axobject-query@^2.0.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.1.2.tgz#2bdffc0371e643e5f03ba99065d5179b9ca79799"
@@ -2161,6 +2220,16 @@ big.js@^5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
   integrity sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
+
+bignumber.js@*:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.0.0.tgz#805880f84a329b5eac6e7cb6f8274b6d82bdf075"
+  integrity sha512-t/OYhhJ2SD+YGBQcjY8GzzDHEk9f3nerxjtfa6tlMXfe7frs/WozhvCNoGvpM0P3bNf3Gq5ZRMlGr5f3r4/N8A==
+
+bignumber.js@^8.1.1:
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-8.1.1.tgz#4b072ae5aea9c20f6730e4e5d529df1271c4d885"
+  integrity sha512-QD46ppGintwPGuL1KqmwhR0O+N2cZUg8JG/VzwI2e28sM9TqHjQB10lI4QAaMHVbLzwVLLAwEglpKPViWX+5NQ==
 
 binary-extensions@^1.0.0:
   version "1.13.1"
@@ -5850,6 +5919,11 @@ jest@24.9.0:
     import-local "^2.0.0"
     jest-cli "^24.9.0"
 
+js-sha3@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.8.0.tgz#b9b7a5da73afad7dedd0f8c463954cbde6818840"
+  integrity sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -6648,6 +6722,11 @@ node-forge@0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.9.0.tgz#d624050edbb44874adca12bb9a52ec63cb782579"
   integrity sha512-7ASaDa3pD+lJ3WvXFsxekJQelBKRpne+GOVbLbtHYdd7pFspyeuJHnWfLplGf3SwKGbfs/aYl5V/JCIaHVUKKQ==
+
+node-forge@^0.8.5:
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.8.5.tgz#57906f07614dc72762c84cef442f427c0e1b86ee"
+  integrity sha512-vFMQIWt+J/7FLNyKouZ9TazT74PRV3wgv9UT4cRjC8BffxFbKXkgIWR42URCPSnHm/QDz6BOlb2Q0U4+VQT67Q==
 
 node-int64@^0.4.0:
   version "0.4.0"

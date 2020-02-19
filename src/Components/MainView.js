@@ -1,8 +1,20 @@
 import React from 'react'
 import '../Styles/MainView.css'
+import createAccount from '../transactions/createAccount'
+
 
 const MainView = (props) => {
-    console.log(props.data)
+		console.log(props.data)
+
+
+    const createHandler = () => {
+        createAccount({
+						account: props.data.state.account.address,
+						publicKey: props.data.publicKey,
+            assetId: null
+        })
+    }
+
     return(
     <div className="MainViewContainer">
         <div className="MainViewContent">
@@ -24,6 +36,7 @@ const MainView = (props) => {
         <div className="MainViewButton">
                 <button onClick={props.onPress}>Sign out</button>
         </div>
+				<button onClick={createHandler}>createAccount</button>
     </div>
     )
 }
