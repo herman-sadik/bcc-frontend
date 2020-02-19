@@ -22,21 +22,21 @@ const createAccount = async data => {
   }
 
   const stuff = {
-    privateKey: '98kpLeeRa1g793JoS924BWYhDbDDVx2DYnV9ND4rnhLK'
+    privateKey: keys.user_private_key
   }
   const iTx = invokeScript({
-    dApp: "3M7BPTZZgqa6JcXqAg7ZiDB2wuChxAxPtgx",
+    dApp: keys.dapp,
     call: { function: "createAccount" },
-    payment: [{ assetId: 'Gci8aULLGc97RMu3WAHombcERuTER3NV54YSrNjgdEW2', amount: 10 }],
+    payment: [{ assetId: keys.asset_id, amount: 10 }],
     chainId: 82,
   }, stuff)
 
   const txObj = {
     amount: 800000000,
-    recipient: '3MEXjT3hfcNiweB1wF76oa8o3R9c7FboFF6',
-    assetId: 'Gci8aULLGc97RMu3WAHombcERuTER3NV54YSrNjgdEW2'
+    recipient: keys.user_address,
+    assetId: keys.asset_id
   }
-  console.log(JSON.stringify(transfer(txObj, '3M7BPTZZgqa6JcXqAg7ZiDB2wuChxAxPtgx')))
+  console.log(JSON.stringify(transfer(txObj, keys.dapp)))
 
   // let txTransfer = await broadcast(transfer(txObj, ))
   const test = await broadcast(iTx, 'http://localhost:6869')
