@@ -1,5 +1,6 @@
 import {invokeScript, broadcast, nodeInteraction, waitForTx} from 'waves-transactions';
 import { stringToUint8Array, sha256, base58encode } from 'waves-crypto';
+import createAccount from '../transactions/createAccount'
 
 export default async (setStatus, setData) => {
 
@@ -34,6 +35,12 @@ export default async (setStatus, setData) => {
     })
     await WavesKeeper.publicState(authData).then(authData => {
       data.state = authData
+      //=====================
+      console.log(authData.account.address)
+      createAccount({
+        account: authData.account.address,
+      })
+      //=====================
     }).catch(err => {
       status = false
       if (err.code) {
