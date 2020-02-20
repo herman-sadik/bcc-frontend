@@ -12,6 +12,7 @@
     "react-scripts": "3.4.0",
     "sweetalert2": "^9.7.2",
     "waves": "^0.1.1",
+    "waves-api": "^0.24.2",
     "waves-crypto": "^1.0.39",
     "waves-transactions": "^3.0.13"
   },
