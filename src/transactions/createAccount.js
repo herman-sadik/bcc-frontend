@@ -1,10 +1,12 @@
-import {broadcast, waitForTx} from '@waves/waves-transactions'
+import {broadcast, waitForTx, nodeInteraction} from '@waves/waves-transactions'
+import { stringToUint8Array, sha256, base58encode } from 'waves-crypto';
 const {invokeScript} = require('@waves/waves-transactions')
+
 
 const nodeUrl = 'http://localhost:6869'
 const multiplier = 10 ** 8
 const chainId = 82
-const dappAddress = '3MPgKkfBngNg3kog5a9Y3zMbAt8GsVfa2zK'
+const dappAddress = '3M7tbn774Vgb3vMGpqYnTgzdrxFfusJ9cvV'
 
 export const createAccount = async data => {
 
@@ -13,14 +15,54 @@ export const createAccount = async data => {
   //   userPrivateKey: String
   // }
 
-  const iTx = invokeScript({
-    dApp: dappAddress,
-    call: { function: "createAccount" },
-    payment: [{ assetId: "63dfCSFSuwM4NrP7pgTuuaNv2vRA6sWUrevxKXJkBE14", amount: 10 * multiplier }],
-    chainId: chainId,
-  }, {privateKey: 'BEjRFEyr7FEtjGqbUGnKvqEpM3SuixMHDVE98hNeNvyZ'})
+  window.wc = {
+    stringToUint8Array,
+    sha256,
+    base58encode,
+  }
+  window.wt = {
+    nodeInteraction,
+    invokeScript,
+    broadcast,
+    waitForTx,
+  }
 
-  await broadcast(iTx, nodeUrl)
-  await waitForTx(iTx.id)
-  console.log(iTx)
+  const { WavesKeeper } = window;
+
+  // const iTx = invokeScript({
+  //   dApp: dappAddress,
+  //   call: { function: "createAccount" },
+  //   payment: [{ assetId: "63dfCSFSuwM4NrP7pgTuuaNv2vRA6sWUrevxKXJkBE14", amount: 10 * multiplier }],
+  //   chainId: chainId,
+  // }, {privateKey: 'BEjRFEyr7FEtjGqbUGnKvqEpM3SuixMHDVE98hNeNvyZ'})
+
+  var tx = {
+    type: 16,
+    data: {
+        fee: {
+            "tokens": "0.005",
+            "assetId": "WAVES"
+        },
+        dApp: dappAddress,
+        call: {
+            function: 'createAccount',
+            args: []
+        },
+        payment: [
+            { amount: 10* multiplier , assetId:"7tmWnCQZHGbmhKsQ7e9RhxiPkowwUtp4YCVXKvbbreEA" }
+        ],
+        chainId: chainId,
+    }
+};
+
+WavesKeeper.signAndPublishTransaction(tx).then((result) => 
+    console.log(result)
+);
+
+
+
+  //await broadcast(iTx, nodeUrl)
+  
+  //await waitForTx(iTx.id)
+  //console.log(iTx)
 }
