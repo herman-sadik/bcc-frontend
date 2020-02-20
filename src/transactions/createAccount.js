@@ -17,8 +17,8 @@ const createAccount = async data => {
     user_address: '3MEXjT3hfcNiweB1wF76oa8o3R9c7FboFF6',
     user_public_key: '7jMtJvxupPhs8pijnjH3EvrfQ3V6KZsWF2uYFgnbCdCR',
     user_private_key: '98kpLeeRa1g793JoS924BWYhDbDDVx2DYnV9ND4rnhLK',
-    dapp: '3M7BPTZZgqa6JcXqAg7ZiDB2wuChxAxPtgx',
-    asset_id: 'Gci8aULLGc97RMu3WAHombcERuTER3NV54YSrNjgdEW2'
+    dapp: '3M4qwDomRabJKLZxuXhwfqLApQkU592nWxF',
+    asset_id: 'Cd6wprgd9v4fuXxidrzCebvUX2sUgiph2CJVqkiV1nkB'
   }
 
   const stuff = {
@@ -27,7 +27,7 @@ const createAccount = async data => {
   const iTx = invokeScript({
     dApp: keys.dapp,
     call: { function: "createAccount" },
-    payment: [{ assetId: keys.asset_id, amount: 10 }],
+    payment: [{ assetId: keys.asset_id, amount: 100000}],
     chainId: 82,
   }, stuff)
 
