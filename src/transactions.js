@@ -3,8 +3,8 @@ import {nodeInteraction} from '@waves/waves-transactions'
 const nodeUrl = 'http://localhost:6869'
 const multiplier = 10 ** 8
 const chainId = 82
-const dappAddress = '3MNhntdoSd9btJxKzbFytt3CF85JuminoKe'
-const assetId = 'AMxocLehhNMrvY9AzMpeBuPNBknKBX4KtMW5D3YBJH6C'
+const dappAddress = '3M7tbn774Vgb3vMGpqYnTgzdrxFfusJ9cvV'
+const assetId = '7tmWnCQZHGbmhKsQ7e9RhxiPkowwUtp4YCVXKvbbreEA'
 
 const getData = key => {
   return nodeInteraction.accountDataByKey(key, dappAddress, nodeUrl)
@@ -12,10 +12,12 @@ const getData = key => {
 
 const invoke = tx => {
   tx.type = 16
-  tx.fee = {
+  
+  tx.data.fee = {
     tokens: '0.005',
     assetId: 'WAVES'
   }
+  return tx
 }
 
 export const getUsers = async () => {
@@ -25,11 +27,12 @@ export const getUsers = async () => {
 
 export const createAccount = () => {
   return invoke({
-    dApp: dappAddress,
-    call: {function: 'createAccount'},
-    payment: [{ assetId: assetId, amount: 10 * multiplier }],
-    chainId: chainId,
-  })
+    data: {
+      dApp: dappAddress,
+      call: {function: 'createAccount', args: []},
+      payment: [{ assetId: assetId, amount: 10 * multiplier }],
+      chainId: chainId,
+  }})
 }
 
 export const deposit = amount => {

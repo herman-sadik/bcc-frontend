@@ -1,5 +1,9 @@
 import React from 'react'
-import {createAccount, deposit, createDevice, getUsers} from '../transactions'
+import { deposit, createDevice, getUsers} from '../transactions'
+
+import {createAccount} from '../transactions/createAccount'
+
+
 import '../Styles/Test.css'
 
 const Test = () => {
