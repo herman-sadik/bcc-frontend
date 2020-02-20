@@ -3,7 +3,6 @@ import './Styles/App.css'
 import authHandler from './Components/Api'
 import Login from './Components/Login'
 import MainView from './Components/MainView'
-import createAccount from './transactions/createAccount'
 
 const  App = () => {
 

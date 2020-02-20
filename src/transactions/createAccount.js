@@ -1,45 +1,26 @@
-import {broadcast, transfer} from '@waves/waves-transactions'
+import {broadcast, waitForTx} from '@waves/waves-transactions'
 const {invokeScript} = require('@waves/waves-transactions')
 
-// {
-//   account: string,
-//   asset_id: string
-// }
+const nodeUrl = 'http://localhost:6869'
+const multiplier = 10 ** 8
+const chainId = 82
+const dappAddress = '3MHJRtZ67WrDPdmoKx2MX2DwEmbQtmuEjrt'
 
-// global amount
-// global dapp address
+export const createAccount = async data => {
 
+  // {
+  //   assetId: String,
+  //   userPrivateKey: String
+  // }
 
-
-const createAccount = async data => {
-
-  const keys = {
-    user_address: '3MEXjT3hfcNiweB1wF76oa8o3R9c7FboFF6',
-    user_public_key: '7jMtJvxupPhs8pijnjH3EvrfQ3V6KZsWF2uYFgnbCdCR',
-    user_private_key: '98kpLeeRa1g793JoS924BWYhDbDDVx2DYnV9ND4rnhLK',
-    dapp: '3M7BPTZZgqa6JcXqAg7ZiDB2wuChxAxPtgx',
-    asset_id: 'Gci8aULLGc97RMu3WAHombcERuTER3NV54YSrNjgdEW2'
-  }
-
-  const stuff = {
-    privateKey: keys.user_private_key
-  }
   const iTx = invokeScript({
-    dApp: keys.dapp,
+    dApp: dappAddress,
     call: { function: "createAccount" },
-    payment: [{ assetId: keys.asset_id, amount: 10 }],
-    chainId: 82,
-  }, stuff)
+    payment: [{ assetId: data.assetId, amount: 10 * multiplier }],
+    chainId: chainId,
+  }, {privateKey: data.userPrivateKey})
 
-  const txObj = {
-    amount: 800000000,
-    recipient: keys.user_address,
-    assetId: keys.asset_id
-  }
-  console.log(JSON.stringify(transfer(txObj, keys.dapp)))
-
-  // let txTransfer = await broadcast(transfer(txObj, ))
-  const test = await broadcast(iTx, 'http://localhost:6869')
+  await broadcast(iTx, nodeUrl)
+  await waitForTx(iTx.id)
+  console.log(iTx)
 }
-
-export default createAccount
