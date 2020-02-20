@@ -1,0 +1,12 @@
+body {
+  background-color: #ddd;
+}
+.test {
+  margin-top: 100px;
+}
+.test button {
+  display: block;
+  margin: auto;
+  margin-bottom: 20px;
+  font-size: 30px;
+}

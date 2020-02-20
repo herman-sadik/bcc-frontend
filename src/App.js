@@ -3,6 +3,7 @@ import './Styles/App.css'
 import authHandler from './Components/Api'
 import Login from './Components/Login'
 import MainView from './Components/MainView'
+import Test from './Components/Test'
 
 const  App = () => {
 
@@ -20,7 +21,8 @@ const  App = () => {
 
   return (
     <div className="App">
-      {page}
+      {/* {page} */}
+      <Test />
     </div>
   )
 }
