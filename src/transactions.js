@@ -35,29 +35,28 @@ export const createAccount = () => {
   }})
 }
 
-export const deposit = amount => {
-  if (!amount) {
-    console.error('Provide amount of tokens as an argument')
-    return
-  }
+export const deposit = () => {
   return invoke({
-    dApp: dappAddress,
-    call: {function: 'deposit'},
-    payment: [{ assetId: assetId, amount: amount * multiplier }],
-    chainId: chainId
-  })
+    data: {
+      dApp: dappAddress,
+      call: {function: 'deposit', args: []},
+      payment: [{ assetId: assetId, amount: 25 * multiplier }],
+      chainId: chainId
+  }})
 }
 
 export const createDevice = () => {
   return invoke({
-    dApp: dappAddress,
-    call: {
-      function: 'createDevice',
-      args: [
-        {type: 'string', value: 'hello there'},
-        {type: 'integer', value: multiplier}
-      ]
-    },
-    chainId: chainId
-  })
+    data: {
+      dApp: dappAddress,
+      call: {
+        function: 'createDevice',
+        args: [
+          {type: 'string', value: 'hello there'},
+          {type: 'integer', value: multiplier}
+        ]
+      },
+      payment: [],
+      chainId: chainId
+  }})
 }

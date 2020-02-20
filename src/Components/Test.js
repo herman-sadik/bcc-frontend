@@ -1,7 +1,7 @@
 import React from 'react'
-import { deposit, createDevice, getUsers} from '../transactions'
+import {deposit, createDevice, getUsers, createAccount} from '../transactions'
 
-import {createAccount} from '../transactions/createAccount'
+import {withWaves} from '../transactions/createAccount'
 
 
 import '../Styles/Test.css'
@@ -10,10 +10,10 @@ const Test = () => {
 
   return ( 
     <div className='test'>
-      <button onClick={createAccount}>createAccount</button>
-      <button onClick={() => deposit(25)}>deposit 25</button>
-      <button onClick={createDevice}>createDevice</button>
-      <button onClick={getUsers}>getUsers</button>
+      <button onClick={() => withWaves(createAccount)}>createAccount</button>
+      <button onClick={() => withWaves(deposit)}>deposit 25</button>
+      <button onClick={() => withWaves(createDevice)}>createDevice</button>
+      {/* <button onClick={() => withWaves(getUsers)}>getUsers</button> */}
     </div>
    )
 }

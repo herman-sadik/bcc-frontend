@@ -6,7 +6,7 @@ import * as transactionActions from '../transactions'
 const {invokeScript} = require('@waves/waves-transactions')
 
 
-export const createAccount = async data => {
+export const withWaves = async func => {
 
   window.wc = {
     stringToUint8Array,
@@ -23,11 +23,10 @@ export const createAccount = async data => {
   const { WavesKeeper } = window;
 
 
-  const tx = transactionActions.createAccount();
-
-
-WavesKeeper.signAndPublishTransaction(tx).then((result) => 
+  const tx = func();
+  WavesKeeper.signAndPublishTransaction(tx).then((result) => 
     console.log(result)
+  
 );
 
 }
