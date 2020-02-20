@@ -1,6 +1,6 @@
 import React from 'react'
 import '../Styles/MainView.css'
-import createAccount from '../transactions/createAccount'
+import {createAccount} from '../transactions/createAccount'
 
 
 const MainView = (props) => {
@@ -9,9 +9,8 @@ const MainView = (props) => {
 
     const createHandler = () => {
         createAccount({
-						account: props.data.state.account.address,
-						publicKey: props.data.publicKey,
-            assetId: null
+            assetId: null,
+            userPrivateKey: '98kpLeeRa1g793JoS924BWYhDbDDVx2DYnV9ND4rnhLK'
         })
     }
 
