@@ -40,7 +40,7 @@ export const currentUser = async () => {
   const balanceExpiration = res[global.config.userAddress + '_usr_balance_expiration'].value
   return {
     address: global.config.userAddress,
-    balance: balance,
+    balance: (balance / global.config.multiplier).toFixed(8),
     balanceExpiration: new Date(balanceExpiration)
   }
 }
@@ -70,13 +70,16 @@ export const deposit = amount => {
 }
 
 export const createDevice = () => {
+
+  const deviceName = Math.random().toString(16).substring(2)
+
   return invoke({
     data: {
       dApp: global.config.dappAddress,
       call: {
         function: 'createDevice',
         args: [
-          {type: 'string', value: 'hello there'},
+          {type: 'string', value: deviceName},
           {type: 'integer', value: global.config.multiplier}
         ]
       },
