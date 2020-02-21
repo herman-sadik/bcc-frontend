@@ -2,7 +2,7 @@ import {nodeInteraction} from '@waves/waves-transactions'
 
 export const init = async () => {
   global.config = {
-    dappAddress: '3MAbF6eWgBXLSKSTSc5G1T175fAAY3ZoLGs',
+    dappAddress: '3MGJSkBepVjABAHDgJ5QiuqWNdtEwJqaNHG',
     nodeUrl: 'http://localhost:6869',
     multiplier: 10 ** 8,
     chainId: 82,

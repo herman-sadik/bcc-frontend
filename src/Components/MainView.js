@@ -1,5 +1,8 @@
 import React from 'react'
+import * as transactions from '../transactions'
+import withWavesKeeper from '../withWavesKeeper'
 import '../Styles/MainView.css'
+import NavBar from './NavBar'
 
 
 const MainView = (props) => {
@@ -7,6 +10,8 @@ const MainView = (props) => {
 
 
     return(
+    <div>
+     <NavBar balance={(props.data.state.account.balance.available / (10 ** 8)).toFixed(4)}/>   
     <div className="MainViewContainer">
         <div className="MainViewContent">
             <div className="MainViewDataContainer">
@@ -23,10 +28,17 @@ const MainView = (props) => {
                     <label>Balance:</label><div>{props.data.state.account.balance.available}</div>
                 </div>
             </div>
+            <div className='test'>
+                <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button>
+                <button onClick={() => withWavesKeeper(transactions.deposit(25))}>deposit 25</button>
+                <button onClick={() => withWavesKeeper(transactions.createDevice())}>createDevice</button>
+                <button onClick={() => console.log(transactions.getUsers())}>getUsers</button>
+            </div>
         </div>
         <div className="MainViewButton">
                 <button onClick={props.onPress}>Sign out</button>
         </div>
+    </div>
     </div>
     )
 }
