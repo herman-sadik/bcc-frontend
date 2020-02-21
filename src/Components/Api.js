@@ -1,21 +1,6 @@
-import {invokeScript, broadcast, nodeInteraction, waitForTx} from 'waves-transactions';
-import { stringToUint8Array, sha256, base58encode } from 'waves-crypto';
-
 export default async (setStatus, setData) => {
 
   setStatus('pending')
-
-  window.wc = {
-    stringToUint8Array,
-    sha256,
-    base58encode,
-  }
-  window.wt = {
-    nodeInteraction,
-    invokeScript,
-    broadcast,
-    waitForTx,
-  }
 
   let data
   const { WavesKeeper } = window;

@@ -3,16 +3,15 @@ import './Styles/App.css'
 import authHandler from './Components/Api'
 import Login from './Components/Login'
 import MainView from './Components/MainView'
-import Test from './Components/Test'
 
 const  App = () => {
 
-  const [status, setStatus] = useState('false')
-  const [data, setData] = useState({})
+  const [status, setStatus] = useState('true')
+  const [address, setAddress] = useState(null)
 
-  let page = <Login status={status} onPress={() => authHandler(setStatus, setData)} />
+  let page = <Login status={status} onPress={() => authHandler(setStatus, setAddress)} />
   if (status === 'true') {
-    page = <MainView data={data} onPress={() => {setStatus('false')}}/>
+    page = <MainView address={address} />
   }
 
   useEffect(() => {

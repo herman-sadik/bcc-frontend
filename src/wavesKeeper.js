@@ -1,8 +1,7 @@
 import {nodeInteraction, invokeScript, broadcast, waitForTx} from 'waves-transactions'
 import { stringToUint8Array, sha256, base58encode } from 'waves-crypto';
 
-const withWavesKeeper = async tx => {
-
+export const initWavesKeeper = () => {
   window.wc = {
     stringToUint8Array,
     sha256,
@@ -14,6 +13,9 @@ const withWavesKeeper = async tx => {
     broadcast,
     waitForTx,
   }
+}
+
+export const withWavesKeeper = async tx => {
 
   const { WavesKeeper } = window;
 
@@ -23,5 +25,3 @@ const withWavesKeeper = async tx => {
     console.log(err)
   })
 }
-
-export default withWavesKeeper
