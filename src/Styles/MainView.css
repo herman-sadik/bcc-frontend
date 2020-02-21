@@ -14,7 +14,7 @@
     height: 600px;
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .MainViewDataContainer{
@@ -26,8 +26,6 @@
 .MainViewData{
     font-size: 1.3rem;
     width: 100%;
-    text-align: center;
-    display: table;
     margin-top: 20px;
 }
 
@@ -43,8 +41,6 @@
 }
 
 .MainViewData > div{
-    display: grid;
-    grid-column-start: -1;
     text-align: left;
     width: 100%;
     margin-top: 5px;
@@ -109,6 +105,10 @@
 
 
 @media screen and (max-width: 999px) { 
+
+    .MainViewContent{
+        height: 500px;
+    }
     
     .ButtonContainer > button {
         max-width: 140px;
@@ -123,14 +123,18 @@
 
 }
 
-@media (max-width: 420px){ 
+@media  only screen and (max-width: 420px){ 
+
+    .MainViewContainer{
+        height: 105vh;
+    }
 
     .MainViewDataContainer{
         margin-left: 10px;
     }
 
     .MainViewContent{
-        height: 720px;
+        height: 600px;
     }
 
     .MainViewData > div{
@@ -157,6 +161,7 @@
         width: 100%;
         flex-direction: column;
         margin-top: 30px;
+        margin-bottom: 10px;
     }
 
     .ButtonContainer > button {
@@ -168,6 +173,7 @@
     }
 
     .MainViewButton{
+        margin-top: 20px;
         margin-bottom: 10px;
     }
 
@@ -176,5 +182,35 @@
 
     }
 
+}
+
+@media only screen and (max-height: 414px){
+    .MainViewContainer{
+        height: 110vh;
+    }
+    .MainViewContent{
+        width: 90%;
+        height: 700px;
+    }
+
+    .MainViewData > label{
+        font-weight: 600;
+       font-size: 16px;
+    }
+
+    .MainViewData > div{
+        margin-top: 2px;
+        font-size: 14px;
+    }
+
+    .ButtonContainer{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .MainViewButton{
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
 }
 

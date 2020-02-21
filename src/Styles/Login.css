@@ -38,3 +38,9 @@
     top: 5;
     margin: auto;
 }
+
+@media  only screen and (max-width: 420px){ 
+    .Buttons> button{
+        width: 100%;
+    }
+}

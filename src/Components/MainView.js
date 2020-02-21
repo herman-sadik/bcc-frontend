@@ -25,7 +25,7 @@ const MainView = (props) => {
 
     return(
     <div>
-     <NavBar balance={parseInt(userInfo.balance).toFixed(2)}/>   
+     <NavBar balance={userInfo.deposit}/>   
     <div className="MainViewContainer">
         <div className="MainViewContent">
             <div className="MainViewDataContainer">
@@ -39,7 +39,7 @@ const MainView = (props) => {
                     <label>Public Key:</label><div><p>{props.data.state.account.publicKey}</p></div>
                 </div>
                 <div className="MainViewData">
-                    <label>Balance:</label><div>{props.data.state.account.balance.available} Waves</div><div>{userInfo.balance} SK</div>
+                    <label>Balance:</label><div>{(props.data.state.account.balance.available / (10 ** 8)).toFixed(4)} Waves</div><div>{userInfo.bccBalance} BCC</div>
                 </div>
             </div>
             <div className='ButtonContainer'>
