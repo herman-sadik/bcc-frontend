@@ -3,25 +3,24 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
 .MainViewContent{
     border: 1px solid black;
+    border-radius: 10px;
     width: 80%;
-    height: 70%;
-    align-items: center;
-    justify-content: center;
-    display: flex
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
 }
 
 .MainViewDataContainer{
     width: 100%;
-    align-items: center;
     justify-content: center;
-    display: grid
+    margin-left: 50px;
 }
 
 .MainViewData{
@@ -54,6 +53,33 @@
     color:	#585858
 }
 
+.ButtonContainer{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 60px;
+}
+
+.ButtonContainer > button {
+    width: 50%;
+    max-width: 180px;
+    height: 50px;
+    box-shadow: 5px 5px 5px 0px #aaa;
+    font-size: 18px;
+    letter-spacing: 2px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+
+.ButtonContainer > button:hover{
+    box-shadow: none;
+    background: #05f;
+    color: white;
+    border:none;
+} 
+
 .MainViewButton{
     justify-content: center;
     align-items: center;
@@ -80,3 +106,75 @@
     box-shadow: none;
     background-color: black;
 }
+
+
+@media screen and (max-width: 999px) { 
+    
+    .ButtonContainer > button {
+        max-width: 140px;
+        height: 40px;
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+
+    .MainViewButton > button{
+        width: 400px;
+    }
+
+}
+
+@media (max-width: 420px){ 
+
+    .MainViewDataContainer{
+        margin-left: 10px;
+    }
+
+    .MainViewContent{
+        height: 720px;
+    }
+
+    .MainViewData > div{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 250px;
+
+    }
+    .MainViewData > label{
+        font-weight: 600;
+       font-size: 16px;
+    }
+
+    .MainViewData > div{
+        margin-top: 2px;
+        font-size: 14px;
+    }
+    
+
+    
+    .ButtonContainer{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        margin-top: 30px;
+    }
+
+    .ButtonContainer > button {
+        max-width: 140px;
+        height: 40px;
+        font-size: 15px;
+        letter-spacing: 1px;
+        margin-top: 10px;
+    }
+
+    .MainViewButton{
+        margin-bottom: 10px;
+    }
+
+    .MainViewButton > button{
+        width: 280px;
+
+    }
+
+}
+

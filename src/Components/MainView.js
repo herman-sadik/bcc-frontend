@@ -25,24 +25,24 @@ const MainView = (props) => {
 
     return(
     <div>
-     <NavBar balance={userInfo.balance}/>   
+     <NavBar balance={parseInt(userInfo.balance).toFixed(2)}/>   
     <div className="MainViewContainer">
         <div className="MainViewContent">
             <div className="MainViewDataContainer">
                 <div className="MainViewData">
-                    <label>Name:</label><div>{props.data.state.account.name}</div>
+                    <label>Name:</label><div><p>{props.data.state.account.name}</p></div>
                     </div>    
                 <div className="MainViewData">
-                    <label>Adress:</label><div>{props.data.state.account.address}</div>
+                    <label>Adress:</label><div><p>{props.data.state.account.address}</p></div>
                 </div>
                 <div className="MainViewData">
-                    <label>Public Key:</label><div>{props.data.state.account.publicKey}</div>
+                    <label>Public Key:</label><div><p>{props.data.state.account.publicKey}</p></div>
                 </div>
                 <div className="MainViewData">
-                    <label>Balance:</label><div>{props.data.state.account.balance.available}</div>
+                    <label>Balance:</label><div>{props.data.state.account.balance.available} Waves</div><div>{userInfo.balance} SK</div>
                 </div>
             </div>
-            <div className='test'>
+            <div className='ButtonContainer'>
                 <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button>
                 <button onClick={() => withWavesKeeper(transactions.deposit(25))}>deposit 25</button>
                 <button onClick={() => withWavesKeeper(transactions.createDevice())}>createDevice</button>
