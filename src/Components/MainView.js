@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import * as transactions from '../transactions'
 import withWavesKeeper from '../withWavesKeeper'
 import '../Styles/MainView.css'
@@ -6,12 +6,26 @@ import NavBar from './NavBar'
 
 
 const MainView = (props) => {
-		console.log(props.data)
+        console.log(props.data)
+
+    const [userInfo, setUserInfo] = useState({}); 
+        
+    // useEffect(async()=> {
+    //     setUserInfo(await transactions.currentUser())
+    // })   
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const info = await transactions.currentUser()
+            setUserInfo(info)
+        }
+        fetchUser()
+    }, []) // eslint-disable-line
 
 
     return(
     <div>
-     <NavBar balance={(props.data.state.account.balance.available / (10 ** 8)).toFixed(4)}/>   
+     <NavBar balance={userInfo.balance}/>   
     <div className="MainViewContainer">
         <div className="MainViewContent">
             <div className="MainViewDataContainer">
@@ -32,7 +46,7 @@ const MainView = (props) => {
                 <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button>
                 <button onClick={() => withWavesKeeper(transactions.deposit(25))}>deposit 25</button>
                 <button onClick={() => withWavesKeeper(transactions.createDevice())}>createDevice</button>
-                <button onClick={() => console.log(transactions.getUsers())}>getUsers</button>
+                <button onClick={async () => console.log(await transactions.currentUser())}>getUsers</button>
             </div>
         </div>
         <div className="MainViewButton">
