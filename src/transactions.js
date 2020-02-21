@@ -33,10 +33,11 @@ const invoke = tx => {
 }
 
 export const getDevices = async () => {
-  const DEVICE_ADDRESS_LENGTH = 12
+  const DEVICE_ADDRESS_LENGTH = 13
 
   const res = await nodeInteraction.accountData(config().dappAddress, config().nodeUrl)
   if (!res) return []
+  console.log(res)
   const devices = []
   Object.keys(res).forEach(item => {
     if (item.substring(DEVICE_ADDRESS_LENGTH) === '_dev_balance') {
@@ -48,6 +49,7 @@ export const getDevices = async () => {
       })
     }
   })
+  console.log(devices)
   return devices
 }
 

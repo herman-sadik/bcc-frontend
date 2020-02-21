@@ -1,0 +1,13 @@
+.SideBarContainer{
+    height: 100vh;
+    width: 300px;
+    background: #444;
+    color: white;
+    display: flex;
+}
+
+@media screen and (max-width: 999px){
+    .SideBarContainer{
+    display: none;
+    }
+}

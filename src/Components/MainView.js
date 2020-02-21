@@ -3,6 +3,7 @@ import * as transactions from '../transactions'
 import withWavesKeeper from '../withWavesKeeper'
 import '../Styles/MainView.css'
 import NavBar from './NavBar'
+import SideBra from './SideBar'
 
 
 const MainView = (props) => {
@@ -25,7 +26,9 @@ const MainView = (props) => {
 
     return(
     <div>
-     <NavBar balance={userInfo.deposit}/>   
+     <NavBar balance={userInfo.deposit}/> 
+     <div className="MainPageFull">
+     <SideBra/>  
     <div className="MainViewContainer">
         <div className="MainViewContent">
             <div className="MainViewDataContainer">
@@ -52,6 +55,7 @@ const MainView = (props) => {
         <div className="MainViewButton">
                 <button onClick={props.onPress}>Sign out</button>
         </div>
+    </div>
     </div>
     </div>
     )
