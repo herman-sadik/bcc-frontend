@@ -4,7 +4,50 @@
     background: #444;
     color: white;
     display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
 }
+
+.SideBarBox{
+    margin-top: 30px;
+    height: 100%;
+    width: 100%;
+}
+
+.Ammount{
+    margin-top: 10px;
+}
+
+.Ammount>p{
+    font-weight: 550;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.SideBarOption{
+    height: 100px;
+    font-size: 18px;
+    font-weight: 550;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.SideBarOption:last-child{
+    border-bottom: none;
+}
+
+.SideBarOption:hover{
+    background-color: #05f;
+}
+
+
 
 @media screen and (max-width: 999px){
     .SideBarContainer{
