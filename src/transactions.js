@@ -6,7 +6,7 @@ export const init = async () => {
     userAddress: '3MGZbHpw6Mttx3AxLUAJQJs2ygYgveiEfp3',
     nodeUrl: 'http://localhost:6869',
     multiplier: 10 ** 8,
-    chainId: 82,
+    chainId: 82
   }
   global.config.assetId = await getAssetId()
 }
@@ -17,7 +17,7 @@ const getData = key => {
   return nodeInteraction.accountDataByKey(key, config().dappAddress, config().nodeUrl)
 }
 
-export const getAssetId = async () => {
+const getAssetId = async () => {
   const res = await getData('asset_id')
   if (res) return res.value
   return null
@@ -30,6 +30,44 @@ const invoke = tx => {
     assetId: 'WAVES'
   }
   return tx
+}
+
+export const getDevices = async () => {
+  const DEVICE_ADDRESS_LENGTH = 12
+
+  const res = await nodeInteraction.accountData(config().dappAddress, config().nodeUrl)
+  if (!res) return []
+  const devices = []
+  Object.keys(res).forEach(item => {
+    if (item.substring(DEVICE_ADDRESS_LENGTH) === '_dev_balance') {
+      const address = item.substring(0, DEVICE_ADDRESS_LENGTH)
+      devices.push({
+        address: address,
+        balance: res[address + '_dev_balance'].value / config().multiplier,
+        price: res[address + '_dev_price'].value / config().multiplier
+      })
+    }
+  })
+  return devices
+}
+
+export const getUsers = async () => {
+  const USER_ADDRESS_LENGTH = 35
+
+  const res = await nodeInteraction.accountData(config().dappAddress, config().nodeUrl)
+  if (!res) return []
+  const users = []
+  Object.keys(res).forEach(item => {
+    if (item.substring(USER_ADDRESS_LENGTH) === '_usr_balance') {
+      const address = item.substring(0, USER_ADDRESS_LENGTH)
+      users.push({
+        address: address,
+        balance: res[address + '_usr_balance'].value / config().multiplier,
+        balanceExpiration: new Date(res[address + '_usr_balance_expiration'].value)
+      })
+    }
+  })
+  return users
 }
 
 export const currentUser = async () => {
@@ -74,7 +112,7 @@ export const createAccount = () => {
 export const deposit = amount => {
   if (!amount) {
     console.error('Provide amount as an argument')
-    return
+    return null
   }
   return invoke({
     data: {
