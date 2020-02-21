@@ -1,13 +1,17 @@
 import {nodeInteraction} from '@waves/waves-transactions'
 
-const nodeUrl = 'http://localhost:6869'
-const multiplier = 10 ** 8
-const chainId = 82
-const dappAddress = '3M4sJHV71NzWpFWKpUU5ki62Pqu3PCPbxiZ' 
-const assetId = '44MoU2AW1J497TCSjXqRbAjWHARrbn2NgGccJ5eWLC65'
+export const init = async () => {
+  global.config = {
+    dappAddress: '3MAbF6eWgBXLSKSTSc5G1T175fAAY3ZoLGs',
+    nodeUrl: 'http://localhost:6869',
+    multiplier: 10 ** 8,
+    chainId: 82,
+  }
+  global.config.assetId = await getAssetId()
+}
 
 const getData = key => {
-  return nodeInteraction.accountDataByKey(key, dappAddress, nodeUrl)
+  return nodeInteraction.accountDataByKey(key, global.config.dappAddress, global.config.nodeUrl)
 }
 
 export const getAssetId = async () => {
@@ -26,41 +30,45 @@ const invoke = tx => {
 }
 
 export const getUsers = async () => {
-  const res = await getData('asset_id').value
+  const res = await nodeInteraction.accountData(global.config.dappAddress, global.config.nodeUrl)
 }
 
 export const createAccount = () => {
   return invoke({
     data: {
-      dApp: dappAddress,
+      dApp: global.config.dappAddress,
       call: {function: 'createAccount', args: []},
-      payment: [{ assetId: assetId, amount: 10 * multiplier }],
-      chainId: chainId,
+      payment: [{ assetId: global.config.assetId, amount: 10 * global.config.multiplier }],
+      chainId: global.config.chainId,
   }})
 }
 
-export const deposit = () => {
+export const deposit = amount => {
+  if (!amount) {
+    console.error('Provide amount as an argument')
+    return
+  }
   return invoke({
     data: {
-      dApp: dappAddress,
+      dApp: global.config.dappAddress,
       call: {function: 'deposit', args: []},
-      payment: [{ assetId: assetId, amount: 25 * multiplier }],
-      chainId: chainId
+      payment: [{ assetId: global.config.assetId, amount: 25 * global.config.multiplier }],
+      chainId: global.config.chainId
   }})
 }
 
 export const createDevice = () => {
   return invoke({
     data: {
-      dApp: dappAddress,
+      dApp: global.config.dappAddress,
       call: {
         function: 'createDevice',
         args: [
           {type: 'string', value: 'hello there'},
-          {type: 'integer', value: multiplier}
+          {type: 'integer', value: global.config.multiplier}
         ]
       },
       payment: [],
-      chainId: chainId
+      chainId: global.config.chainId
   }})
 }
