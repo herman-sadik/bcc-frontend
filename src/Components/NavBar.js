@@ -1,7 +1,7 @@
 import React from 'react'
 
 import '../Styles/NavBar.css'
-import Logo from '../assets/bcc_logo.png'
+import Logo from '../Assets/bcc_logo.png'
 
 const NavBar = props => {
 

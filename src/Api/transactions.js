@@ -1,6 +1,6 @@
 import {nodeInteraction} from '@waves/waves-transactions'
 import cryptoRandomString from 'crypto-random-string'
-import local from './local.json'
+import local from '../local.json'
 
 export const init = async () => {
   global.config = {

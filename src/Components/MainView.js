@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react'
-import * as transactions from '../transactions'
-import {withWavesKeeper} from '../wavesKeeper'
+import * as transactions from '../Api/transactions'
+import {withWavesKeeper} from '../Api/wavesKeeper'
 import '../Styles/MainView.css'
 import NavBar from './NavBar'
 
 
-const MainView = (props) => {
-        console.log(props.data)
+const MainView = () => {
 
     const [userInfo, setUserInfo] = useState({}); 
         
@@ -33,7 +32,7 @@ const MainView = (props) => {
                     <label>Name:</label><div><p>placeholder</p></div>
                     </div>    
                 <div className="MainViewData">
-                    <label>Adress:</label><div><p>{props.address}</p></div>
+                    <label>Adress:</label><div><p>{userInfo.address}</p></div>
                 </div>
                 <div className="MainViewData">
                     <label>Public Key:</label><div><p>placeholder</p></div>
@@ -50,7 +49,7 @@ const MainView = (props) => {
             </div>
         </div>
         <div className="MainViewButton">
-                <button onClick={props.onPress}>Sign out</button>
+                <button>Sign out</button>
         </div>
     </div>
     </div>

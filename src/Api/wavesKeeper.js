@@ -17,9 +17,20 @@ export const initWavesKeeper = () => {
 
 export const withWavesKeeper = async tx => {
 
-  const { WavesKeeper } = window;
+  const { WavesKeeper } = window
 
   WavesKeeper.signAndPublishTransaction(tx).then(res => {
+    console.log(res)
+  }).catch(err => {
+    console.log(err)
+  })
+}
+
+export const askForAddress = async () => {
+
+  const { WavesKeeper } = window
+
+  WavesKeeper.publicState().then(res => {
     console.log(res)
   }).catch(err => {
     console.log(err)

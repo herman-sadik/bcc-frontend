@@ -1,6 +1,6 @@
 import React from 'react'
-import * as transactions from '../transactions'
-import {withWavesKeeper} from '../wavesKeeper'
+import * as transactions from '../Api/transactions'
+import {withWavesKeeper} from '../Api/wavesKeeper'
 import '../Styles/Test.css'
 
 const Test = () => {
