@@ -10,7 +10,7 @@ const Test = () => {
       <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button>
       <button onClick={() => withWavesKeeper(transactions.deposit(25))}>deposit 25</button>
       <button onClick={() => withWavesKeeper(transactions.createDevice())}>createDevice</button>
-      <button onClick={() => console.log(transactions.getUsers())}>getUsers</button>
+      <button onClick={async () => console.log(await transactions.currentUser())}>getUsers</button>
     </div>
    )
 }

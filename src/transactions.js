@@ -3,6 +3,7 @@ import {nodeInteraction} from '@waves/waves-transactions'
 export const init = async () => {
   global.config = {
     dappAddress: '3MAbF6eWgBXLSKSTSc5G1T175fAAY3ZoLGs',
+    userAddress: '3M5rWpEpRFQSfDTHnttvYHj27vm7UtuuPUJ',
     nodeUrl: 'http://localhost:6869',
     multiplier: 10 ** 8,
     chainId: 82,
@@ -29,8 +30,19 @@ const invoke = tx => {
   return tx
 }
 
-export const getUsers = async () => {
+export const currentUser = async () => {
   const res = await nodeInteraction.accountData(global.config.dappAddress, global.config.nodeUrl)
+  if (!res) {
+    console.error('User not found')
+    return
+  }
+  const balance = res[global.config.userAddress + '_usr_balance'].value
+  const balanceExpiration = res[global.config.userAddress + '_usr_balance_expiration'].value
+  return {
+    address: global.config.userAddress,
+    balance: balance,
+    balanceExpiration: new Date(balanceExpiration)
+  }
 }
 
 export const createAccount = () => {
