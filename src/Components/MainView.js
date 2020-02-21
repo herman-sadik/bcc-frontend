@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import * as transactions from '../transactions'
-import withWavesKeeper from '../withWavesKeeper'
+import {withWavesKeeper} from '../wavesKeeper'
 import '../Styles/MainView.css'
 import NavBar from './NavBar'
 
