@@ -10,7 +10,7 @@ const NavBar = props => {
             <div className="NavBarBox">
                 <div className="NavBarLogo"><img src={Logo} alt="logo_bcc"/></div>
                 <div className="NavBarInfo">
-                <div className="NavBarBalance"><p>Balance:</p><p>{props.balance}</p></div>
+                <div className="NavBarBalance"><p>Deposit:</p><p>{props.balance} BCC</p></div>
                 </div>
             </div>
         </div>
