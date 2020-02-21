@@ -1,10 +1,11 @@
 import {nodeInteraction} from '@waves/waves-transactions'
 import cryptoRandomString from 'crypto-random-string'
+import local from './local.json'
 
 export const init = async () => {
   global.config = {
-    dappAddress: '3MJHg6DeK3h3hUH98ywVbz3eA2sxa1YibHb',
-    userAddress: '3M5rWpEpRFQSfDTHnttvYHj27vm7UtuuPUJ',
+    dappAddress: local.dapp,
+    userAddress: local.user,
     nodeUrl: 'http://localhost:6869',
     multiplier: 10 ** 8,
     chainId: 82

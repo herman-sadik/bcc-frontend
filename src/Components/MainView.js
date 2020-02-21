@@ -30,16 +30,16 @@ const MainView = (props) => {
         <div className="MainViewContent">
             <div className="MainViewDataContainer">
                 <div className="MainViewData">
-                    <label>Name:</label><div><p>{props.data.state.account.name}</p></div>
+                    <label>Name:</label><div><p>placeholder</p></div>
                     </div>    
                 <div className="MainViewData">
-                    <label>Adress:</label><div><p>{props.data.state.account.address}</p></div>
+                    <label>Adress:</label><div><p>{props.address}</p></div>
                 </div>
                 <div className="MainViewData">
-                    <label>Public Key:</label><div><p>{props.data.state.account.publicKey}</p></div>
+                    <label>Public Key:</label><div><p>placeholder</p></div>
                 </div>
                 <div className="MainViewData">
-                    <label>Balance:</label><div>{(props.data.state.account.balance.available / (10 ** 8)).toFixed(4)} Waves</div><div>{userInfo.bccBalance} BCC</div>
+                    <label>Balance:</label><div>{(0 / (10 ** 8)).toFixed(4)} Waves</div><div>{userInfo.bccBalance} BCC</div>
                 </div>
             </div>
             <div className='ButtonContainer'>
