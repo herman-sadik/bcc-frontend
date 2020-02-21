@@ -1,8 +1,9 @@
 import {nodeInteraction} from '@waves/waves-transactions'
+import cryptoRandomString from 'crypto-random-string'
 
 export const init = async () => {
   global.config = {
-    dappAddress: '3MEsBD9VPpe59f6VAaHeN3pZsFRS21BBYti',
+    dappAddress: '3MJHg6DeK3h3hUH98ywVbz3eA2sxa1YibHb',
     userAddress: '3M5rWpEpRFQSfDTHnttvYHj27vm7UtuuPUJ',
     nodeUrl: 'http://localhost:6869',
     multiplier: 10 ** 8,
@@ -13,12 +14,8 @@ export const init = async () => {
 
 const config = () => global.config
 
-const getData = key => {
-  return nodeInteraction.accountDataByKey(key, config().dappAddress, config().nodeUrl)
-}
-
 const getAssetId = async () => {
-  const res = await getData('asset_id')
+  const res = await nodeInteraction.accountDataByKey('asset_id', config().dappAddress, config().nodeUrl)
   if (res) return res.value
   return null
 }
@@ -33,10 +30,10 @@ const invoke = tx => {
 }
 
 export const getDevices = async () => {
-  const DEVICE_ADDRESS_LENGTH = 12
+  const DEVICE_ADDRESS_LENGTH = 35
 
   const res = await nodeInteraction.accountData(config().dappAddress, config().nodeUrl)
-  if (!res) return []
+  if (!res) throw 'Connection error'
   const devices = []
   Object.keys(res).forEach(item => {
     if (item.substring(DEVICE_ADDRESS_LENGTH) === '_dev_balance') {
@@ -125,7 +122,7 @@ export const deposit = amount => {
 
 export const createDevice = () => {
 
-  const deviceName = Math.random().toString(16).substring(2)
+  const deviceName = cryptoRandomString({length: 35, type: 'base64'})
 
   return invoke({
     data: {
