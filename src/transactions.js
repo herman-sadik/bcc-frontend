@@ -2,8 +2,8 @@ import {nodeInteraction} from '@waves/waves-transactions'
 
 export const init = async () => {
   global.config = {
-    dappAddress: '3MGJSkBepVjABAHDgJ5QiuqWNdtEwJqaNHG',
-    userAddress: '3MGZbHpw6Mttx3AxLUAJQJs2ygYgveiEfp3',
+    dappAddress: '3MEsBD9VPpe59f6VAaHeN3pZsFRS21BBYti',
+    userAddress: '3M5rWpEpRFQSfDTHnttvYHj27vm7UtuuPUJ',
     nodeUrl: 'http://localhost:6869',
     multiplier: 10 ** 8,
     chainId: 82,
@@ -11,8 +11,10 @@ export const init = async () => {
   global.config.assetId = await getAssetId()
 }
 
+const config = () => global.config
+
 const getData = key => {
-  return nodeInteraction.accountDataByKey(key, global.config.dappAddress, global.config.nodeUrl)
+  return nodeInteraction.accountDataByKey(key, config().dappAddress, config().nodeUrl)
 }
 
 export const getAssetId = async () => {
@@ -31,27 +33,41 @@ const invoke = tx => {
 }
 
 export const currentUser = async () => {
-  const res = await nodeInteraction.accountData(global.config.dappAddress, global.config.nodeUrl)
-  if (!res) {
-    console.error('User not found')
-    return
-  }
-  const balance = res[global.config.userAddress + '_usr_balance'].value
-  const balanceExpiration = res[global.config.userAddress + '_usr_balance_expiration'].value
+
+  const account = await nodeInteraction.accountData(config().dappAddress, config().nodeUrl)
+  const bccBalance = await nodeInteraction.assetBalance(config().assetId, config().userAddress, config().nodeUrl)
+  const wavesBalance = await nodeInteraction.balance(config().userAddress, config().nodeUrl)
+
+  const countBalance = balance => (balance / config().multiplier)
+
+  if (Object.keys(account).length === 0 || !bccBalance || !wavesBalance)
+    throw 'Connection Error'
+
+  let deposit = account[config().userAddress + '_usr_balance']
+  if (deposit) deposit = countBalance(deposit.value)
+  else deposit = null
+
+  let depositExpiration = account[config().userAddress + '_usr_balance_expiration']
+  if (depositExpiration) depositExpiration = new Date(depositExpiration.value)
+  else depositExpiration = null
+
   return {
-    address: global.config.userAddress,
-    balance: (balance / global.config.multiplier).toFixed(8),
-    balanceExpiration: new Date(balanceExpiration)
+    address: config().userAddress,
+    hasAccount: !(!deposit || !depositExpiration),
+    bccBalance: bccBalance ? countBalance(bccBalance) : null,
+    wavesBalance: wavesBalance ? countBalance(wavesBalance) : null,
+    deposit: deposit,
+    depositExpiration: depositExpiration
   }
 }
 
 export const createAccount = () => {
   return invoke({
     data: {
-      dApp: global.config.dappAddress,
+      dApp: config().dappAddress,
       call: {function: 'createAccount', args: []},
-      payment: [{ assetId: global.config.assetId, amount: 10 * global.config.multiplier }],
-      chainId: global.config.chainId,
+      payment: [{ assetId: config().assetId, amount: 10 * config().multiplier }],
+      chainId: config().chainId,
   }})
 }
 
@@ -62,10 +78,10 @@ export const deposit = amount => {
   }
   return invoke({
     data: {
-      dApp: global.config.dappAddress,
+      dApp: config().dappAddress,
       call: {function: 'deposit', args: []},
-      payment: [{ assetId: global.config.assetId, amount: 25 * global.config.multiplier }],
-      chainId: global.config.chainId
+      payment: [{ assetId: config().assetId, amount: 25 * config().multiplier }],
+      chainId: config().chainId
   }})
 }
 
@@ -75,15 +91,15 @@ export const createDevice = () => {
 
   return invoke({
     data: {
-      dApp: global.config.dappAddress,
+      dApp: config().dappAddress,
       call: {
         function: 'createDevice',
         args: [
           {type: 'string', value: deviceName},
-          {type: 'integer', value: global.config.multiplier}
+          {type: 'integer', value: config().multiplier}
         ]
       },
       payment: [],
-      chainId: global.config.chainId
+      chainId: config().chainId
   }})
 }
