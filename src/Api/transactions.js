@@ -46,6 +46,7 @@ export const getDevices = async () => {
       })
     }
   })
+  console.log(devices)
   return devices
 }
 

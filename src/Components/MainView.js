@@ -3,6 +3,7 @@ import * as transactions from '../Api/transactions'
 import {withWavesKeeper} from '../Api/wavesKeeper'
 import '../Styles/MainView.css'
 import NavBar from './NavBar'
+import SideBar from './SideBar'
 
 
 const MainView = () => {
@@ -24,18 +25,21 @@ const MainView = () => {
 
     return(
     <div>
-     <NavBar balance={userInfo.deposit}/>   
+     <NavBar balance={userInfo.deposit}/> 
+     <div className="MainPageFull">
+     <SideBar
+        waves={userInfo.wavesBalance}
+        bbc={userInfo.bccBalance}
+        deposit={userInfo.deposit}
+        onCreateAccount={() => withWavesKeeper(transactions.createAccount())}
+        onCreateDevice={() => withWavesKeeper(transactions.createDevice())}
+        onGetUser={async () => console.log(await transactions.currentUser())}
+        />  
     <div className="MainViewContainer">
         <div className="MainViewContent">
-            <div className="MainViewDataContainer">
-                <div className="MainViewData">
-                    <label>Name:</label><div><p>placeholder</p></div>
-                    </div>    
+            <div className="MainViewDataContainer">  
                 <div className="MainViewData">
                     <label>Adress:</label><div><p>{userInfo.address}</p></div>
-                </div>
-                <div className="MainViewData">
-                    <label>Public Key:</label><div><p>placeholder</p></div>
                 </div>
                 <div className="MainViewData">
                     <label>Balance:</label><div>{(0 / (10 ** 8)).toFixed(4)} Waves</div><div>{userInfo.bccBalance} BCC</div>
@@ -51,6 +55,7 @@ const MainView = () => {
         <div className="MainViewButton">
                 <button>Sign out</button>
         </div>
+    </div>
     </div>
     </div>
     )
