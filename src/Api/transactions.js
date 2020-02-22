@@ -87,7 +87,7 @@ export const currentUser = async address => {
 
   return {
     address: address,
-    hasAccount: !(!deposit || !depositExpiration),
+    hasAccount: deposit !== null,
     bccBalance: bccBalance ? countBalance(bccBalance) : null,
     wavesBalance: wavesBalance ? countBalance(wavesBalance) : null,
     deposit: deposit,
