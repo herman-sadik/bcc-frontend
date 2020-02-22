@@ -50,9 +50,13 @@ const MainView = props => {
         <label>Balance:</label><div>{userInfo.wavesBalance} Waves</div><div>{userInfo.bccBalance} BCC</div>
     </div>
     </div>) : 
-    (<div>
+    (<div className="DeviceContainer">
+        <div className="DeviceLabels">
+        <label>Address</label>
+        <label>Price</label>
+        </div>
          {devices.map(item => 
-            <div key={item.address}>
+            <div className="DevicesBox" key={item.address}>
                 <div>{item.address}</div>
                 <div>{item.price}</div>
             </div>
@@ -89,7 +93,6 @@ const MainView = props => {
             </div>
         </div>
         <div className="MainViewButton">
-                <button>Sign out</button>
         </div>
     </div>
     </div>
