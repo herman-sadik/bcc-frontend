@@ -41,6 +41,15 @@ const MainView = props => {
     }
 
 
+    const DepositeHandler = async () => {
+        Swal.fire({
+            title: 'Submit your Github username',
+            input: 'number',
+            showCancelButton: true,
+        }).then(result => {withWavesKeeper(transactions.deposit(result.value))})
+    }
+
+
 
     const Windowdevice = userInfos ? (<div className="MainViewDataContainer">  
     <div className="MainViewData">
@@ -84,7 +93,7 @@ const MainView = props => {
         {Windowdevice}
             <div className='ButtonContainer'>
                 {!userInfo.hasAccount ? <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button> : null}
-                <button onClick={() => withWavesKeeper(transactions.deposit(25))}>deposit 25</button>
+                <button onClick={DepositeHandler}>deposit 25</button>
                 <button onClick={() => withWavesKeeper(transactions.createDevice())}>createDevice</button>
                 <button onClick={async () => {console.log(await transactions.currentUser(props.address));setUSerInfos(true)}}>getUser</button>
             </div>

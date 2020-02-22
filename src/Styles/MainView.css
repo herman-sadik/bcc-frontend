@@ -26,6 +26,7 @@
     width: 100%;
     justify-content: center;
     margin-left: 50px;
+    height: 206px;
 }
 
 .MainViewData{
@@ -76,13 +77,16 @@
     margin-top: 20px;
     width: 80%;
     align-items: flex-start;
+    font-size: 1.2rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:	#585858
      
 }
 
 .DevicesBox > div:first-child {
     width: 60%;
-    
 }
+
 
 .ButtonContainer{
     display: flex;
@@ -146,7 +150,16 @@
 @media screen and (max-width: 999px) { 
 
     .MainViewContent{
-        height: 350px;
+        height: 400px;
+    }
+
+    .DevicesBox > div:first-child {
+        width: 75%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 300px;
+        
     }
     
     .ButtonContainer > button {
@@ -204,7 +217,7 @@
     
     .DevicesBox{
         width: 90%;
-         
+        font-size: 14px;
     }
     
     .DevicesBox > div:first-child {
@@ -284,3 +297,22 @@
     }
 }
 
+
+@media only screen and (max-height: 770px) and (min-height:765px){
+    .DevicesBox > div:first-child {
+        width: 75%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 300px;
+        
+    }
+    
+    .ButtonContainer > button {
+        max-width: 140px;
+        height: 50px;
+        font-size: 15px;
+        letter-spacing: 1px;
+        margin-top: 10px;
+    }
+}

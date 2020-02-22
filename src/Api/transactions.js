@@ -114,7 +114,7 @@ export const deposit = amount => {
     data: {
       dApp: config().dappAddress,
       call: {function: 'deposit', args: []},
-      payment: [{ assetId: config().assetId, amount: 25 * config().multiplier }],
+      payment: [{ assetId: config().assetId, amount: amount * config().multiplier }],
       chainId: config().chainId
   }})
 }
