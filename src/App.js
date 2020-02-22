@@ -3,6 +3,7 @@ import './Styles/App.css'
 import MainView from './Components/MainView'
 import Spinner from './Components/Spinner'
 import $ from 'jquery'
+import Test from './Components/Test'
 
 
 const  App = () => {
@@ -28,9 +29,11 @@ const  App = () => {
     setTimeout(askForData, 500)
   }, [])
 
+  const content = window.location.pathname !== '/test' ? <MainView address={address} /> : <Test address={address}/>
+
   return (
     <div className="App">
-      {address ? <MainView address={address} /> : <Spinner />}
+      {address ? content : <Spinner />}
     </div>
   )
 }
