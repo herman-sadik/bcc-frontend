@@ -22,6 +22,8 @@ const getAssetId = async () => {
 
 const invoke = tx => {
   tx.type = 16
+  tx.data.dApp = config().dappAddress
+  tx.data.chainId = config().chainId
   tx.data.fee = {
     tokens: '0.005',
     assetId: 'WAVES'
@@ -98,10 +100,8 @@ export const currentUser = async address => {
 export const createAccount = () => {
   return invoke({
     data: {
-      dApp: config().dappAddress,
       call: {function: 'createAccount', args: []},
       payment: [{ assetId: config().assetId, amount: 10 * config().multiplier }],
-      chainId: config().chainId,
   }})
 }
 
@@ -112,28 +112,43 @@ export const deposit = amount => {
   }
   return invoke({
     data: {
-      dApp: config().dappAddress,
       call: {function: 'deposit', args: []},
       payment: [{ assetId: config().assetId, amount: 25 * config().multiplier }],
-      chainId: config().chainId
   }})
 }
 
-export const createDevice = () => {
+export const createDevice = price => {
 
   const deviceName = cryptoRandomString({length: 35, type: 'base64'})
 
   return invoke({
     data: {
-      dApp: config().dappAddress,
       call: {
         function: 'createDevice',
         args: [
           {type: 'string', value: deviceName},
-          {type: 'integer', value: config().multiplier}
+          {type: 'integer', value: (price ? price : 1) * config().multiplier}
         ]
       },
       payment: [],
-      chainId: config().chainId
   }})
+}
+
+export const makeReservation = (device, date) => {
+
+  const dateInteger = date.getTime()
+  console.log(dateInteger, device)
+
+  return invoke({
+    data: {
+      call: {
+        function: 'reserve',
+        args: [
+          {type: 'string', value: device},
+          {type: 'integer', value: dateInteger}
+        ]
+      },
+      payment: [],
+    },
+  })
 }
