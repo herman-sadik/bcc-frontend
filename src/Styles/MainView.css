@@ -54,6 +54,36 @@
     color:	#585858
 }
 
+.DeviceContainer{
+    height: 206px;
+    overflow: auto;
+    width: 100%;
+}
+
+.DeviceLabels{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.DevicesBox{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    width: 80%;
+    align-items: flex-start;
+     
+}
+
+.DevicesBox > div:first-child {
+    width: 60%;
+    
+}
+
 .ButtonContainer{
     display: flex;
     width: 100%;
@@ -143,7 +173,7 @@
     }
 
     .MainViewContent{
-        height: 400px;
+        height: 450px;
     }
 
     .MainViewData > div{
@@ -161,6 +191,29 @@
     .MainViewData > div{
         margin-top: 2px;
         font-size: 14px;
+    }
+
+    .DeviceLabels{
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+    .DeviceLabels > label:last-child{
+        margin-left: 50px;
+    }
+    
+    .DevicesBox{
+        width: 90%;
+         
+    }
+    
+    .DevicesBox > div:first-child {
+        width: 70%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 250px;
+        
     }
     
 
