@@ -5,7 +5,6 @@ import local from '../local.json'
 export const init = async () => {
   global.config = {
     dappAddress: local.dapp,
-    userAddress: local.user,
     nodeUrl: 'http://localhost:6869',
     multiplier: 10 ** 8,
     chainId: 82
@@ -46,7 +45,6 @@ export const getDevices = async () => {
       })
     }
   })
-  console.log(devices)
   return devices
 }
 
@@ -69,27 +67,26 @@ export const getUsers = async () => {
   return users
 }
 
-export const currentUser = async () => {
-
+export const currentUser = async address => {
   const account = await nodeInteraction.accountData(config().dappAddress, config().nodeUrl)
-  const bccBalance = await nodeInteraction.assetBalance(config().assetId, config().userAddress, config().nodeUrl)
-  const wavesBalance = await nodeInteraction.balance(config().userAddress, config().nodeUrl)
+  const bccBalance = await nodeInteraction.assetBalance(config().assetId, address, config().nodeUrl)
+  const wavesBalance = await nodeInteraction.balance(address, config().nodeUrl)
 
   const countBalance = balance => (balance / config().multiplier)
 
   if (Object.keys(account).length === 0 || !bccBalance || !wavesBalance)
     throw 'Connection Error'
 
-  let deposit = account[config().userAddress + '_usr_balance']
+  let deposit = account[address + '_usr_balance']
   if (deposit) deposit = countBalance(deposit.value)
   else deposit = null
 
-  let depositExpiration = account[config().userAddress + '_usr_balance_expiration']
+  let depositExpiration = account[address + '_usr_balance_expiration']
   if (depositExpiration) depositExpiration = new Date(depositExpiration.value)
   else depositExpiration = null
 
   return {
-    address: config().userAddress,
+    address: address,
     hasAccount: !(!deposit || !depositExpiration),
     bccBalance: bccBalance ? countBalance(bccBalance) : null,
     wavesBalance: wavesBalance ? countBalance(wavesBalance) : null,

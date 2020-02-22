@@ -3,6 +3,13 @@ import { stringToUint8Array, sha256, base58encode } from 'waves-crypto';
 import Swal from 'sweetalert2'
 
 export const initWavesKeeper = () => {
+
+  global.config = {
+    user: {
+      address: null
+    }
+  }
+
   window.wc = {
     stringToUint8Array,
     sha256,
@@ -38,13 +45,3 @@ export const withWavesKeeper = async tx => {
   })
 }
 
-export const askForAddress = async () => {
-
-  const { WavesKeeper } = window
-
-  WavesKeeper.publicState().then(res => {
-    console.log(res)
-  }).catch(err => {
-    console.log(err)
-  })
-}

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useCallback} from 'react'
 import * as transactions from '../Api/transactions'
 import {withWavesKeeper} from '../Api/wavesKeeper'
 import Swal from 'sweetalert2'
@@ -6,8 +6,7 @@ import '../Styles/MainView.css'
 import NavBar from './NavBar'
 import SideBar from './SideBar'
 
-
-const MainView = () => {
+const MainView = props => {
 
     const [userInfo, setUserInfo] = useState({}); 
     const [devices, setDevices] = useState([])
@@ -18,7 +17,7 @@ const MainView = () => {
     // }) 
     
     const fetchUser = async () => {
-        const info = await transactions.currentUser()
+        const info = await transactions.currentUser(props.address)
         setUserInfo(info)
     }
 
@@ -73,7 +72,7 @@ const MainView = () => {
         userInfo = {userInfo.hasAccount}
         onCreateAccount={() => withWavesKeeper(transactions.createAccount())}
         onCreateDevice={() => withWavesKeeper(transactions.createDevice())}
-        onGetUser={async () => {console.log(await transactions.currentUser()); setUSerInfos(true)}}
+        onGetUser={async () => {console.log(await transactions.currentUser(props.address)); setUSerInfos(true)}}
         onGetDevices={getDevices}
         />  
     <div className="MainViewContainer">
@@ -83,7 +82,7 @@ const MainView = () => {
                 {!userInfo.hasAccount ? <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button> : null}
                 <button onClick={() => withWavesKeeper(transactions.deposit(25))}>deposit 25</button>
                 <button onClick={() => withWavesKeeper(transactions.createDevice())}>createDevice</button>
-                <button onClick={async () => {console.log(await transactions.currentUser());setUSerInfos(true)}}>getUser</button>
+                <button onClick={async () => {console.log(await transactions.currentUser(props.address));setUSerInfos(true)}}>getUser</button>
             </div>
             <div className='ButtonContainer'>
             <button onClick={getDevices}>get Devices</button>
