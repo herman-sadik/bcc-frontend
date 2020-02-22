@@ -1,27 +1,21 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useCallback} from 'react'
 import * as transactions from '../Api/transactions'
 import {withWavesKeeper} from '../Api/wavesKeeper'
 import '../Styles/MainView.css'
 import NavBar from './NavBar'
 import SideBar from './SideBar'
 
-
-const MainView = () => {
+const MainView = props => {
 
     const [userInfo, setUserInfo] = useState({}); 
-        
-    // useEffect(async()=> {
-    //     setUserInfo(await transactions.currentUser())
-    // })   
 
     useEffect(() => {
         const fetchUser = async () => {
-            const info = await transactions.currentUser()
+            const info = await transactions.currentUser(props.address)
             setUserInfo(info)
         }
         fetchUser()
     }, []) // eslint-disable-line
-
 
     return(
     <div>
@@ -33,7 +27,7 @@ const MainView = () => {
         deposit={userInfo.deposit}
         onCreateAccount={() => withWavesKeeper(transactions.createAccount())}
         onCreateDevice={() => withWavesKeeper(transactions.createDevice())}
-        onGetUser={async () => console.log(await transactions.currentUser())}
+        onGetUser={async () => console.log(await transactions.currentUser(props.address))}
         />  
     <div className="MainViewContainer">
         <div className="MainViewContent">
@@ -49,7 +43,7 @@ const MainView = () => {
                 <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button>
                 <button onClick={() => withWavesKeeper(transactions.deposit(25))}>deposit 25</button>
                 <button onClick={() => withWavesKeeper(transactions.createDevice())}>createDevice</button>
-                <button onClick={async () => console.log(await transactions.currentUser())}>getUsers</button>
+                <button onClick={async () => console.log(await transactions.currentUser(props.address))}>getUsers</button>
             </div>
         </div>
         <div className="MainViewButton">
