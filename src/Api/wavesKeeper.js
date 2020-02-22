@@ -1,5 +1,6 @@
 import {nodeInteraction, invokeScript, broadcast, waitForTx} from 'waves-transactions'
 import { stringToUint8Array, sha256, base58encode } from 'waves-crypto';
+import Swal from 'sweetalert2'
 
 export const initWavesKeeper = () => {
   window.wc = {
@@ -21,8 +22,19 @@ export const withWavesKeeper = async tx => {
 
   WavesKeeper.signAndPublishTransaction(tx).then(res => {
     console.log(res)
+    Swal.fire({
+      title : 'Good job!',
+      text: 'Success!',
+      icon : 'success',
+    })
   }).catch(err => {
     console.log(err)
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: err.data ? (err.data).charAt(45).toUpperCase() + (err.data).slice(46) : "User reject transaction",
+    })
+
   })
 }
 

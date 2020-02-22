@@ -13,10 +13,10 @@ const SideBar = props => {
                 <div>{props.deposit} BBC</div>
             </div>
             <div className="SideBarBox">
-                <div className="SideBarOption" onClick={props.onCreateAccount}>createAccount</div>
+                {!props.userInfo? <div className="SideBarOption" onClick={props.onCreateAccount}>createAccount</div> : null}
                 <div className="SideBarOption" onClick={props.onCreateDevice}>createDevice</div>
                 <div className="SideBarOption" onClick={props.onGetUser}>getUser</div>
-                <div className="SideBarOption">sdf</div>
+                <div className="SideBarOption" onClick={props.onGetDevices}>get Devices</div>
                 <div className="SideBarOption">sdf</div>
             </div>
         </div>
