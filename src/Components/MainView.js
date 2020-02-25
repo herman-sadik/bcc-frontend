@@ -3,6 +3,7 @@ import * as transactions from '../Api/transactions'
 import * as nodeInteraction from '../Api/nodeInteraction'
 import {withWavesKeeper} from '../Api/wavesKeeper'
 import Swal from 'sweetalert2'
+import Add from "@material-ui/icons/AddCircleOutline"
 
 import '../Styles/MainView.css'
 import NavBar from './NavBar'
@@ -67,6 +68,9 @@ const MainView = props => {
     <div className="MainViewData">
         <label>Balance:</label><div>{userInfo.wavesBalance} Waves</div><div>{userInfo.bccBalance} BCC</div>
     </div>
+    <div className="MainViewData">
+        <label>Deposit:</label><div className="ManiViewDataAdd">{userInfo.deposit} BCC <Add/></div>
+    </div>
     </div>) : 
     (<div className="DeviceContainer">
         <div className="DeviceLabels">
@@ -74,7 +78,7 @@ const MainView = props => {
         <label>Price</label>
         </div>
          {devices.map(item => 
-            <div className="DevicesBox" key={item.address}
+            <div className="DevicesBox" key={item.address}>
                 <div onClick={() => reservationHandler(item.address)} style={{cursor: "pointer"}}>{item.address}</div>
                 <div>{item.price}</div>
             </div>
@@ -99,7 +103,7 @@ const MainView = props => {
     <div className="MainViewContainer">
         <div className="MainViewContent">
         {Windowdevice}
-            <div className='ButtonContainer'>
+            {/* <div className='ButtonContainer'>
                 {!userInfo.hasAccount ? <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button> : null}
                 <button onClick={DepositeHandler}>deposit BCC</button>
                 <button onClick={() => withWavesKeeper(transactions.createDevice())}>createDevice</button>
@@ -107,7 +111,7 @@ const MainView = props => {
             </div>
             <div className='ButtonContainer'>
             <button onClick={getDevices}>get Devices</button>
-            </div>
+            </div> */}
         </div>
         <div className="MainViewButton">
         </div>
