@@ -21,7 +21,6 @@ const Test = props => {
       <button onClick={async () => console.log(await nodeInteraction.getDevices())}>get Devices</button>
       <button onClick={async () => console.log(await nodeInteraction.getUsers())}>get Users</button>
       <button onClick={() => withWavesKeeper(transactions.makeReservation(device, date))}>reservation</button>
-      <button onClick={async () => console.log(await nodeInteraction.checkIfDeviceReserved(device))}>checkIfDeviceReserved</button>
     </div>
    )
 }
