@@ -3,6 +3,7 @@ import * as transactions from '../Api/transactions'
 import * as nodeInteraction from '../Api/nodeInteraction'
 import {withWavesKeeper} from '../Api/wavesKeeper'
 import Swal from 'sweetalert2'
+
 import '../Styles/MainView.css'
 import NavBar from './NavBar'
 import SideBar from './SideBar'
@@ -73,7 +74,7 @@ const MainView = props => {
         <label>Price</label>
         </div>
          {devices.map(item => 
-            <div className="DevicesBox" key={item.address}>
+            <div className="DevicesBox" key={item.address}
                 <div onClick={() => reservationHandler(item.address)} style={{cursor: "pointer"}}>{item.address}</div>
                 <div>{item.price}</div>
             </div>
