@@ -1,29 +1,27 @@
 import {nodeInteraction} from '@waves/waves-transactions'
 import cryptoRandomString from 'crypto-random-string'
-import local from '../local.json'
 
-export const init = async () => {
-  global.config = {
-    dappAddress: local.dapp,
-    nodeUrl: 'http://localhost:6869',
-    multiplier: 10 ** 8,
-    chainId: 82
-  }
-  global.config.assetId = await getAssetId()
+export const config = {
+  dappAddress: process.env.REACT_APP_dapp,
+  nodeUrl: process.env.REACT_APP_nodeUrl,
+  multiplier: 10 ** 8,
+  chainId: process.env.REACT_APP_chainId
 }
 
-const config = () => global.config
-
-const getAssetId = async () => {
-  const res = await nodeInteraction.accountDataByKey('asset_id', config().dappAddress, config().nodeUrl)
+export const getAssetId = async () => {
+  const res = await nodeInteraction.accountDataByKey('asset_id', config.dappAddress, config.nodeUrl)
   if (res) return res.value
   return null
 }
 
+export const init = async () => {
+  global.assetId = await getAssetId()
+}
+
 const invoke = tx => {
   tx.type = 16
-  tx.data.dApp = config().dappAddress
-  tx.data.chainId = config().chainId
+  tx.data.dApp = config.dappAddress
+  tx.chainId = config.chainId
   tx.data.fee = {
     tokens: '0.005',
     assetId: 'WAVES'
@@ -34,7 +32,7 @@ const invoke = tx => {
 export const getDevices = async () => {
   const DEVICE_ADDRESS_LENGTH = 35
 
-  const res = await nodeInteraction.accountData(config().dappAddress, config().nodeUrl)
+  const res = await nodeInteraction.accountData(config.dappAddress, config.nodeUrl)
   if (!res) throw 'Connection error'
   const devices = []
   Object.keys(res).forEach(item => {
@@ -42,8 +40,8 @@ export const getDevices = async () => {
       const address = item.substring(0, DEVICE_ADDRESS_LENGTH)
       devices.push({
         address: address,
-        balance: res[address + '_dev_balance'].value / config().multiplier,
-        price: res[address + '_dev_price'].value / config().multiplier
+        balance: res[address + '_dev_balance'].value / config.multiplier,
+        price: res[address + '_dev_price'].value / config.multiplier
       })
     }
   })
@@ -53,7 +51,7 @@ export const getDevices = async () => {
 export const getUsers = async () => {
   const USER_ADDRESS_LENGTH = 35
 
-  const res = await nodeInteraction.accountData(config().dappAddress, config().nodeUrl)
+  const res = await nodeInteraction.accountData(config.dappAddress, config.nodeUrl)
   if (!res) return []
   const users = []
   Object.keys(res).forEach(item => {
@@ -61,7 +59,7 @@ export const getUsers = async () => {
       const address = item.substring(0, USER_ADDRESS_LENGTH)
       users.push({
         address: address,
-        balance: res[address + '_usr_balance'].value / config().multiplier,
+        balance: res[address + '_usr_balance'].value / config.multiplier,
         balanceExpiration: new Date(res[address + '_usr_balance_expiration'].value)
       })
     }
@@ -70,11 +68,18 @@ export const getUsers = async () => {
 }
 
 export const currentUser = async address => {
-  const account = await nodeInteraction.accountData(config().dappAddress, config().nodeUrl)
-  const bccBalance = await nodeInteraction.assetBalance(config().assetId, address, config().nodeUrl)
-  const wavesBalance = await nodeInteraction.balance(address, config().nodeUrl)
 
-  const countBalance = balance => (balance / config().multiplier)
+  let account, bccBalance, wavesBalance
+  try {
+    account = await nodeInteraction.accountData(config.dappAddress, config.nodeUrl)
+    bccBalance = await nodeInteraction.assetBalance(global.assetId, address, config.nodeUrl)
+    wavesBalance = await nodeInteraction.balance(address, config.nodeUrl)
+  }
+  catch {
+    throw 'Connection Error'
+  }
+
+  const countBalance = balance => (balance / config.multiplier)
 
   if (Object.keys(account).length === 0 || !bccBalance || !wavesBalance)
     throw 'Connection Error'
@@ -101,7 +106,7 @@ export const createAccount = () => {
   return invoke({
     data: {
       call: {function: 'createAccount', args: []},
-      payment: [{ assetId: config().assetId, amount: 10 * config().multiplier }],
+      payment: [{ assetId: global.assetId, amount: 10 * config.multiplier }],
   }})
 }
 
@@ -113,7 +118,7 @@ export const deposit = amount => {
   return invoke({
     data: {
       call: {function: 'deposit', args: []},
-      payment: [{ assetId: config().assetId, amount: 25 * config().multiplier }],
+      payment: [{ assetId: global.assetId, amount: amount * config.multiplier }],
   }})
 }
 
@@ -127,7 +132,7 @@ export const createDevice = price => {
         function: 'createDevice',
         args: [
           {type: 'string', value: deviceName},
-          {type: 'integer', value: (price ? price : 1) * config().multiplier}
+          {type: 'integer', value: (price ? price : 1) * config.multiplier}
         ]
       },
       payment: [],

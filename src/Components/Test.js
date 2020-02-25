@@ -11,6 +11,8 @@ const Test = props => {
 
   const device = "nJKSaEFn7SmhhEdL/wFYFY7fex842Qgg0jj"
 
+  console.log(process.env)
+
   return ( 
     <div className='test'>
       <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button>
