@@ -43,10 +43,17 @@ const MainView = props => {
 
     const DepositeHandler = async () => {
         Swal.fire({
-            title: 'Submit your Github username',
+            title: 'How many BCC you want deposit',
             input: 'number',
             showCancelButton: true,
         }).then(result => {withWavesKeeper(transactions.deposit(result.value))})
+    }
+
+    const reservationHandler = async (device) => {
+        let dateInteger = new Date().getTime()
+        dateInteger += 24 * 3600 * 1000
+        const date = new Date(dateInteger)
+        withWavesKeeper(transactions.makeReservation(device, date))
     }
 
 
@@ -66,13 +73,12 @@ const MainView = props => {
         </div>
          {devices.map(item => 
             <div className="DevicesBox" key={item.address}>
-                <div>{item.address}</div>
+                <div onClick={() => reservationHandler(item.address)}>{item.address}</div>
                 <div>{item.price}</div>
             </div>
         )
         }
     </div> )
-
 
     return(
     <div>
@@ -93,7 +99,7 @@ const MainView = props => {
         {Windowdevice}
             <div className='ButtonContainer'>
                 {!userInfo.hasAccount ? <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button> : null}
-                <button onClick={DepositeHandler}>deposit 25</button>
+                <button onClick={DepositeHandler}>deposit BCC</button>
                 <button onClick={() => withWavesKeeper(transactions.createDevice())}>createDevice</button>
                 <button onClick={async () => {console.log(await transactions.currentUser(props.address));setUSerInfos(true)}}>getUser</button>
             </div>
