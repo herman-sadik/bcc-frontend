@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useCallback} from 'react'
 import * as transactions from '../Api/transactions'
+import * as nodeInteraction from '../Api/nodeInteraction'
 import {withWavesKeeper} from '../Api/wavesKeeper'
 import Swal from 'sweetalert2'
 import '../Styles/MainView.css'
@@ -13,11 +14,11 @@ const MainView = props => {
     const [userInfos, setUSerInfos] = useState(true)
         
     // useEffect(async()=> {
-    //     setUserInfo(await transactions.currentUser())
+    //     setUserInfo(await nodeInteraction.currentUser())
     // }) 
     
     const fetchUser = async () => {
-        const info = await transactions.currentUser(props.address)
+        const info = await nodeInteraction.currentUser(props.address)
         setUserInfo(info)
     }
 
@@ -27,7 +28,7 @@ const MainView = props => {
 
 
     const getDevices = async () => {
-        const device = await transactions.getDevices();
+        const device = await nodeInteraction.getDevices();
         console.log(device)
         let deviceTab = []
         for(let key in device){
@@ -85,7 +86,7 @@ const MainView = props => {
         userInfo = {userInfo.hasAccount}
         onCreateAccount={() => withWavesKeeper(transactions.createAccount())}
         onCreateDevice={() => withWavesKeeper(transactions.createDevice())}
-        onGetUser={async () => {console.log(await transactions.currentUser(props.address)); setUSerInfos(true)}}
+        onGetUser={async () => {console.log(await nodeInteraction.currentUser(props.address)); setUSerInfos(true)}}
         onGetDevices={getDevices}
         />  
     <div className="MainViewContainer">
@@ -95,7 +96,7 @@ const MainView = props => {
                 {!userInfo.hasAccount ? <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button> : null}
                 <button onClick={DepositeHandler}>deposit 25</button>
                 <button onClick={() => withWavesKeeper(transactions.createDevice())}>createDevice</button>
-                <button onClick={async () => {console.log(await transactions.currentUser(props.address));setUSerInfos(true)}}>getUser</button>
+                <button onClick={async () => {console.log(await nodeInteraction.currentUser(props.address));setUSerInfos(true)}}>getUser</button>
             </div>
             <div className='ButtonContainer'>
             <button onClick={getDevices}>get Devices</button>
