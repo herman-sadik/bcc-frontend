@@ -73,7 +73,7 @@ const MainView = props => {
         </div>
          {devices.map(item => 
             <div className="DevicesBox" key={item.address}>
-                <div onClick={() => reservationHandler(item.address)}>{item.address}</div>
+                <div onClick={() => reservationHandler(item.address)} style={{cursor: "pointer"}}>{item.address}</div>
                 <div>{item.price}</div>
             </div>
         )
