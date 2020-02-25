@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import './Styles/App.css'
-import MainView from './Components/MainView'
 import Spinner from './Components/Spinner'
 import $ from 'jquery'
-import Test from './Components/Test'
-
+import routes from './routes'
+import {Route, Switch} from 'react-router'
 
 const  App = () => {
 
@@ -29,11 +28,24 @@ const  App = () => {
     setTimeout(askForData, 500)
   }, [])
 
-  const content = window.location.pathname !== '/test' ? <MainView address={address} /> : <Test address={address}/>
+  const routesJSX = routes.map(route => (
+    <Route 
+      path={route.path}
+      exact={route.exact}
+      component={() => <route.component address={address} />}
+      key={route.path}
+    />
+  ))
+
+  const router = (
+    <Switch>
+      {routesJSX}
+    </Switch>
+  )
 
   return (
     <div className="App">
-      {address ? content : <Spinner />}
+      {address ? router : <Spinner />}
     </div>
   )
 }

@@ -17,10 +17,16 @@ export const init = async () => {
   global.assetId = await getData('asset_id')
 }
 
-const daySinceDappStart = async () => {
+export const daySinceDappStart = async () => {
   const dappStart = await getData('dapp_start_date')
   const milliSecondsInOneDay = 24 * 3600 * 1000 
   return Math.floor((new Date() - dappStart) / milliSecondsInOneDay)
+}
+
+export const deviceReservedDays = async device => {
+  const res = await nodeInteraction.accountData(config.dappAddress, config.nodeUrl)
+  console.log(res)
+  return []
 }
 
 export const getDevices = async () => {
@@ -97,4 +103,8 @@ export const currentUser = async address => {
     deposit: deposit,
     depositExpiration: depositExpiration
   }
+}
+
+export const deviceReservations = (month = 0) => {
+  console.log(month)
 }
