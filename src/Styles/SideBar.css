@@ -1,5 +1,5 @@
 .SideBarContainer{
-    height: 100vh;
+    height: calc(100vh - 70px);
     width: 300px;
     background: #444;
     color: white;
@@ -23,6 +23,19 @@
     font-weight: 550;
     font-size: 18px;
     letter-spacing: 1px;
+}
+
+.SideBarDeposit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SideBarDeposit > svg{
+    margin-left: 15px;
+    color: limegreen;
+    cursor: pointer;
+    font-size: 27px;
 }
 
 .SideBarOption{

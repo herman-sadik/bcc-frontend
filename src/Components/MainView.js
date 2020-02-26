@@ -3,11 +3,9 @@ import * as transactions from '../Api/transactions'
 import * as nodeInteraction from '../Api/nodeInteraction'
 import {withWavesKeeper} from '../Api/wavesKeeper'
 import Swal from 'sweetalert2'
-import Add from "@material-ui/icons/AddCircleOutline"
+import Add from "@material-ui/icons/AddCircle"
 
 import '../Styles/MainView.css'
-import NavBar from './NavBar'
-import SideBar from './SideBar'
 
 const MainView = props => {
 
@@ -62,7 +60,7 @@ const MainView = props => {
     <label>Balance:</label><div>{userInfo.wavesBalance} Waves</div><div>{userInfo.bccBalance} BCC</div>
   </div>
   <div className="MainViewData">
-        <label>Deposit:</label><div className="ManiViewDataAdd">{userInfo.deposit} BCC <Add/></div>
+        <label>Deposit:</label><div className="ManiViewDataAdd">{userInfo.deposit === null ? 0 : userInfo.deposit} BCC <Add onClick={DepositeHandler}/></div>
     </div>
   </div>) : 
   (<div className="DeviceContainer">
@@ -80,19 +78,6 @@ const MainView = props => {
   </div> )
 
   return(
-  <div>
-   <NavBar balance={userInfo.deposit === null ? 0 : userInfo.deposit}/> 
-   <div className="MainPageFull">
-   <SideBar
-    waves={userInfo.wavesBalance}
-    bbc={userInfo.bccBalance}
-    deposit={userInfo.deposit === null ? 0 : userInfo.deposit}
-    userInfo = {userInfo.hasAccount}
-    onCreateAccount={() => withWavesKeeper(transactions.createAccount())}
-    onCreateDevice={() => withWavesKeeper(transactions.createDevice())}
-    onGetUser={async () => {console.log(await nodeInteraction.currentUser(props.address)); setUSerInfos(true)}}
-    onGetDevices={getDevices}
-    />  
   <div className="MainViewContainer">
     <div className="MainViewContent">
     {Windowdevice}
@@ -108,8 +93,6 @@ const MainView = props => {
     </div>
     <div className="MainViewButton">
     </div>
-  </div>
-  </div>
   </div>
   )
 }
