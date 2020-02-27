@@ -1,7 +1,6 @@
 import React,{useEffect, useState} from 'react'
-import * as transactions from '../Api/transactions'
 import * as nodeInteraction from '../Api/nodeInteraction'
-import {withWavesKeeper} from '../Api/wavesKeeper'
+import {withRouter} from 'react-router'
 
 import '../Styles/DevicesView.css'
 
@@ -9,28 +8,16 @@ const DevicesView = props => {
 
     const [devices, setDevices] = useState([])
 
-    const getDevices = async () => {
-        const device = await nodeInteraction.getDevices();
-        console.log(device)
-        let deviceTab = []
-        for(let key in device){
-          const address = device[key].address
-          const price = device[key].price
-          deviceTab.push({address: address, price: price})
-        }
-        setDevices(deviceTab)
+    useEffect(()=> {
+      const getDevices = async () => {
+        setDevices(await nodeInteraction.getDevices())
       }
+      getDevices()
+    },[])
 
-      useEffect(()=> {
-        getDevices();
-      },[])
-
-      const reservationHandler = async (device) => {
-        let dateInteger = new Date().getTime()
-        dateInteger += 24 * 3600 * 1000
-        const date = new Date(dateInteger)
-        withWavesKeeper(transactions.makeReservation(device, date))
-      }
+    const reservationHandler = async (device) => {
+      props.history.push(`/${device}/reservation-date`)
+    }
 
     return (
     <div className="DeviceContainer">
@@ -58,4 +45,4 @@ const DevicesView = props => {
     );
 }
 
-export default DevicesView
+export default withRouter(DevicesView)

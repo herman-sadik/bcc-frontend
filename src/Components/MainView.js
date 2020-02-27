@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback} from 'react'
+import React, {useEffect, useState} from 'react'
 import * as transactions from '../Api/transactions'
 import * as nodeInteraction from '../Api/nodeInteraction'
 import {withWavesKeeper} from '../Api/wavesKeeper'
@@ -10,8 +10,10 @@ import '../Styles/MainView.css'
 const MainView = props => {
 
   const [userInfo, setUserInfo] = useState({}); 
-  const [devices, setDevices] = useState([])
-  const [userInfos, setUSerInfos] = useState(true)
+  // const [devices, setDevices] = useState([])
+  // const [userInfos, setUSerInfos] = useState(true)
+  const devices = []
+  const userInfos = true
   
   const fetchUser = async () => {
     const info = await nodeInteraction.currentUser(props.address)
@@ -22,19 +24,19 @@ const MainView = props => {
     fetchUser()
   }, []) // eslint-disable-line
 
-  const getDevices = async () => {
-    const device = await nodeInteraction.getDevices();
-    console.log(device)
-    let deviceTab = []
-    for(let key in device){
-      const address = device[key].address
-      const price = device[key].price
-      deviceTab.push({address: address, price: price})
-    }
-    setDevices(deviceTab)
-    console.log(deviceTab)
-    setUSerInfos(false)
-  }
+  // const getDevices = async () => {
+  //   const device = await nodeInteraction.getDevices();
+  //   console.log(device)
+  //   let deviceTab = []
+  //   for(let key in device){
+  //     const address = device[key].address
+  //     const price = device[key].price
+  //     deviceTab.push({address: address, price: price})
+  //   }
+  //   setDevices(deviceTab)
+  //   console.log(deviceTab)
+  //   setUSerInfos(false)
+  // }
 
   const DepositeHandler = async () => {
     Swal.fire({

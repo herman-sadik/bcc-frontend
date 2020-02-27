@@ -14,10 +14,8 @@ import Swal from 'sweetalert2'
 const  App = (props) => {
 
   const [address, setAddress] = useState(null)
-  const [userInfo, setUserInfo] = useState({}); 
+  const [userInfo, setUserInfo] = useState({})
   
- 
-
   const askForData = async () => {
     const { WavesKeeper } = window
     $('document').ready(() => {
@@ -26,6 +24,7 @@ const  App = (props) => {
       } else {
         WavesKeeper.publicState().then(res => {
           setAddress(res.account.address)
+          global.userAddress = res.account.address
         }).catch(err => {
           console.log(err)
         })
@@ -34,16 +33,14 @@ const  App = (props) => {
   }
   
   const fetchUser = async () => {
-    const info = await nodeInteraction.currentUser(address)
+    const info = await nodeInteraction.currentUser(global.userAddress)
     setUserInfo(info)
   }
 
   useEffect(() => {
     setTimeout(askForData, 500)
-    fetchUser()
-  }, [])
-
-
+    setTimeout(fetchUser, 600)
+  }, []) // eslint-disable-line
 
   const DepositeHandler = async () => {
     Swal.fire({
@@ -57,9 +54,9 @@ const  App = (props) => {
   const routesJSX = routes.map(route => (
     <Route 
       path={route.path}
+      key={String(Math.random())}
       exact={route.exact}
       component={() => <route.component address={address} />}
-      key={route.path}
     />
   ))
 

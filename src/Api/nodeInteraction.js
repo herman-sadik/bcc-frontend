@@ -23,18 +23,12 @@ export const daySinceDappStart = async () => {
   return Math.floor((new Date() - dappStart) / milliSecondsInOneDay)
 }
 
-export const deviceReservedDays = async device => {
-  const res = await nodeInteraction.accountData(config.dappAddress, config.nodeUrl)
-  console.log(res)
-  return []
-}
-
 export const getDevices = async () => {
   const DEVICE_ADDRESS_LENGTH = 35
 
   const res = await nodeInteraction.accountData(config.dappAddress, config.nodeUrl)
   const day = await daySinceDappStart()
-  if (!res) throw 'Connection error'
+  if (!res) throw new Error('Connection error')
   const devices = []
   Object.keys(res).forEach(item => {
     if (item.substring(DEVICE_ADDRESS_LENGTH) === '_dev_balance') {
@@ -72,20 +66,23 @@ export const getUsers = async () => {
 
 export const currentUser = async address => {
 
+  if (!address) throw new Error('Address not given')
+
   let account, bccBalance, wavesBalance
+
   try {
     account = await nodeInteraction.accountData(config.dappAddress, config.nodeUrl)
     bccBalance = await nodeInteraction.assetBalance(global.assetId, address, config.nodeUrl)
     wavesBalance = await nodeInteraction.balance(address, config.nodeUrl)
   }
   catch {
-    throw 'Connection Error'
+    throw new Error('Connection error')
   }
 
   const countBalance = balance => (balance / config.multiplier)
 
   if (Object.keys(account).length === 0 || !bccBalance || !wavesBalance)
-    throw 'Connection Error'
+    throw new Error('Connection error')
 
   let deposit = account[address + '_usr_balance']
   if (deposit) deposit = countBalance(deposit.value)
@@ -105,6 +102,12 @@ export const currentUser = async address => {
   }
 }
 
-export const deviceReservations = (month = 0) => {
-  console.log(month)
+export const deviceReservedDays = async device => {
+  const str = device + '_dev_reservation_'
+  const res = await nodeInteraction.accountData(config.dappAddress, config.nodeUrl)
+  const keys = Object.keys(res).filter(item => item.includes(str))
+  const days = keys.map(item => parseInt(item.replace(str, '')))
+  const dappStart = await getData('dapp_start_date')
+  const dates = days.map(day => new Date(dappStart + (day * 24 * 3600 * 1000)))
+  return dates
 }
