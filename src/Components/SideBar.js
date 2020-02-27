@@ -19,7 +19,6 @@ const SideBar = props => {
                 <div className="SideBarOption" onClick={props.onCreateDevice}>createDevice</div>
                 <Link className="SideBarOption" to={'/'}>getUser</Link>
                 <Link className="SideBarOption" to={'/devices'}>get Devices</Link>
-                <div className="SideBarOption">sdf</div>
             </div>
         </div>
     )

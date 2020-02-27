@@ -31,13 +31,14 @@
     flex-direction: column;
     justify-content: space-around;
     margin-top: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 1em;
     width: 80%;
+    height:150px;
     min-height: 150px;
     font-size: 1.2rem;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color:	#585858;
-    box-shadow: 10px 10px 10px #ccc;
+    box-shadow: 10px 10px 10px grey;
     border-radius: 15px;
     background: white;  
 }
