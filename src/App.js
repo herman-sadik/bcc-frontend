@@ -75,8 +75,6 @@ const  App = (props) => {
         userInfo = {userInfo.hasAccount}
         onCreateAccount={() => withWavesKeeper(transactions.createAccount())}
         onCreateDevice={() => withWavesKeeper(transactions.createDevice())}
-        onGetUser={async () => {console.log(await nodeInteraction.currentUser(address))}}
-        onGetDevices={()=>{}}
       /> 
     <Switch>
       {routesJSX}

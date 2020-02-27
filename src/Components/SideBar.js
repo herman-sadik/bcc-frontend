@@ -1,5 +1,6 @@
 import React from 'react'
 import Add from "@material-ui/icons/AddCircle"
+import {Link} from 'react-router-dom'
 
 import '../Styles/SideBar.css'
 
@@ -16,8 +17,8 @@ const SideBar = props => {
             <div className="SideBarBox">
                 {!props.userInfo? <div className="SideBarOption" onClick={props.onCreateAccount}>createAccount</div> : null}
                 <div className="SideBarOption" onClick={props.onCreateDevice}>createDevice</div>
-                <div className="SideBarOption" onClick={props.onGetUser}>getUser</div>
-                <div className="SideBarOption" onClick={props.onGetDevices}>get Devices</div>
+                <Link className="SideBarOption" to={'/'}>getUser</Link>
+                <Link className="SideBarOption" to={'/devices'}>get Devices</Link>
                 <div className="SideBarOption">sdf</div>
             </div>
         </div>
