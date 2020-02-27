@@ -50,6 +50,8 @@
     margin-left: 5px;
     margin-right: 5px;
     cursor: pointer;
+    text-decoration: none;
+    color: white;
 }
 
 .SideBarOption:last-child{
