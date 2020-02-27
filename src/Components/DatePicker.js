@@ -6,6 +6,7 @@ import {withRouter} from 'react-router'
 import {withWavesKeeper} from '../Api/wavesKeeper'
 import * as transactions from '../Api/transactions'
 import '../Styles/DatePicker.css'
+import Swal from 'sweetalert2'
 
 const DatePicker = props => {
 
@@ -24,6 +25,13 @@ const DatePicker = props => {
   }, []) // eslint-disable-line
 
   const reservationHandler = async () => {
+    if (!date) {
+      Swal.fire({
+        title: 'Choose available date',
+        icon: 'error'
+      })
+      return
+    }
     await withWavesKeeper(transactions.makeReservation(deviceAddress(), date))
     props.history.push('/devices')
   }

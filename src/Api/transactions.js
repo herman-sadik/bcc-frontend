@@ -40,7 +40,7 @@ export const deposit = amount => {
 
 export const createDevice = price => {
 
-  const deviceName = cryptoRandomString({length: 35, type: 'base64'})
+  const deviceName = cryptoRandomString({length: 35, type: 'url-safe'})
 
   return invoke({
     data: {
