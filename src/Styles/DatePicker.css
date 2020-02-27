@@ -1,0 +1,10 @@
+.p-disabled {
+  background-color: #FF4136;
+}
+.p-datepicker-other-month .p-disabled {
+  background-color: white;
+}
+.date-picker {
+  margin: auto;
+  margin-top: 20px;
+}

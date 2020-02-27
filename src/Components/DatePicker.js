@@ -3,6 +3,9 @@ import {Calendar} from 'primereact/calendar'
 import {Button} from 'primereact/button'
 import {deviceReservedDays} from '../Api/nodeInteraction'
 import {withRouter} from 'react-router'
+import {withWavesKeeper} from '../Api/wavesKeeper'
+import * as transactions from '../Api/transactions'
+import '../Styles/DatePicker.css'
 
 const DatePicker = props => {
 
@@ -18,15 +21,16 @@ const DatePicker = props => {
       setDisabledDays(await deviceReservedDays(deviceAddress()))
     }
     fetchDays()
-  }, [])
+  }, []) // eslint-disable-line
 
-  const style = {
-    marginTop: '20vh'
+  const reservationHandler = async () => {
+    await withWavesKeeper(transactions.makeReservation(deviceAddress(), date))
+    props.history.push('/devices')
   }
 
   return ( 
     <div className='date-picker'>
-      <h4 style={style}>Choose available date</h4>
+      <h4>Choose available date</h4>
       <Calendar 
         inline={true}
         value={date}
@@ -34,7 +38,7 @@ const DatePicker = props => {
         disabledDates={disabledDays}
       />
       <br /><br />
-      <Button label='Confirm'/>
+      <Button label='Confirm' onClick={reservationHandler} />
     </div>
    )
 }
