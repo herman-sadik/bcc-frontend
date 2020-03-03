@@ -51,6 +51,22 @@ const  App = (props) => {
     }).then(result => {withWavesKeeper(transactions.deposit(result.value))})
   }
 
+  const createDeviceHandler = async () => {
+    Swal.mixin({
+      input: 'text',
+      confirmButtonText: 'Next &rarr;',
+      showCancelButton: true,
+      progressSteps: ['1', '2']
+    }).queue([
+      'Device Name',
+      'Device Price'
+    ]).then(result => {
+      const [a,b] = result.value
+      withWavesKeeper(transactions.createDevice(b))
+    }
+    )
+  }
+
   const routesJSX = routes.map(route => (
     <Route 
       path={route.path}
@@ -71,7 +87,7 @@ const  App = (props) => {
         addDeposit={DepositeHandler}
         userInfo = {userInfo.hasAccount}
         onCreateAccount={() => withWavesKeeper(transactions.createAccount())}
-        onCreateDevice={() => withWavesKeeper(transactions.createDevice())}
+        onCreateDevice={createDeviceHandler}
       /> 
     <Switch>
       {routesJSX}
