@@ -16,9 +16,10 @@ const SideBar = props => {
             </div>
             <div className="SideBarBox">
                 {!props.userInfo? <div className="SideBarOption" onClick={props.onCreateAccount}>createAccount</div> : null}
-                <div className="SideBarOption" onClick={props.onCreateDevice}>createDevice</div>
-                <Link className="SideBarOption" to={'/'}>getUser</Link>
-                <Link className="SideBarOption" to={'/devices'}>get Devices</Link>
+                <div className="SideBarOption" onClick={props.onCreateDevice}>Create Device</div>
+                <Link className="SideBarOption" to={'/'}>Profile</Link>
+                <Link className="SideBarOption" to={'/devices'}>Devices</Link>
+                <Link className="SideBarOption" to={'/users'}>Users</Link>
             </div>
         </div>
     )
