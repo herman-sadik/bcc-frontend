@@ -55,13 +55,16 @@ const  App = (props) => {
       input: 'text',
       confirmButtonText: 'Next &rarr;',
       showCancelButton: true,
+      reverseButtons: true,
       progressSteps: ['1', '2']
     }).queue([
       'Device Name',
       'Device Price'
     ]).then(result => {
-      const [_, b] = result.value
-      withWavesKeeper(transactions.createDevice(b))
+      if (!result.value) return
+      const [name, price] = result.value
+      console.warn(`Device name not used - ${name}`)
+      withWavesKeeper(transactions.createDevice(price))
     }
     )
   }

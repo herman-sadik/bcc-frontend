@@ -26,8 +26,10 @@ const Test = props => {
 
       <br />
       <h2>Backend</h2>
+      
       {/* Create user backend request */}
       <button onClick={() => backendRequests.createFaucet(props.address)}>createFaucet</button>
+
       <button onClick={() => backendRequests.createDevice(props.address)}>createDevice</button>
     </div>
    )

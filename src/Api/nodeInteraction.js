@@ -82,9 +82,6 @@ export const currentUser = async address => {
 
   const countBalance = balance => (balance / config.multiplier)
 
-  if (Object.keys(account).length === 0 || !bccBalance || !wavesBalance)
-    throw new Error('Connection error')
-
   let deposit = account[address + '_usr_balance']
   if (deposit) deposit = countBalance(deposit.value)
   else deposit = null
