@@ -24,7 +24,7 @@ const  App = (props) => {
       } else {
         WavesKeeper.publicState().then(res => {
           setAddress(res.account.address)
-          global.userAddress = res.account.address
+          fetchUser(res.account.address)
         }).catch(err => {
           console.log(err)
         })
@@ -32,14 +32,13 @@ const  App = (props) => {
     })
   }
   
-  const fetchUser = async () => {
-    const info = await nodeInteraction.currentUser(global.userAddress)
+  const fetchUser = async address => {
+    const info = await nodeInteraction.currentUser(address)
     setUserInfo(info)
   }
 
   useEffect(() => {
     setTimeout(askForData, 500)
-    setTimeout(fetchUser, 600)
   }, []) // eslint-disable-line
 
   const DepositHandler = async () => {
