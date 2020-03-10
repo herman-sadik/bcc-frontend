@@ -3,6 +3,7 @@ import * as transactions from '../Api/transactions'
 import {withWavesKeeper} from '../Api/wavesKeeper'
 import * as nodeInteraction from '../Api/nodeInteraction'
 import '../Styles/Test.css'
+import * as backendRequests from '../Api/backendRequests'
 
 const Test = props => {
 
@@ -14,6 +15,7 @@ const Test = props => {
 
   return ( 
     <div className='test'>
+      <h2>Blockchain</h2>
       <button onClick={() => withWavesKeeper(transactions.createAccount())}>createAccount</button>
       <button onClick={() => withWavesKeeper(transactions.deposit(25))}>deposit 25</button>
       <button onClick={() => withWavesKeeper(transactions.createDevice(2))}>createDevice</button>
@@ -21,6 +23,12 @@ const Test = props => {
       <button onClick={async () => console.log(await nodeInteraction.getDevices())}>get Devices</button>
       <button onClick={async () => console.log(await nodeInteraction.getUsers())}>get Users</button>
       <button onClick={() => withWavesKeeper(transactions.makeReservation(device, date))}>reservation</button>
+
+      <br />
+      <h2>Backend</h2>
+      {/* Create user backend request */}
+      <button onClick={() => backendRequests.createFaucet(props.address)}>createFaucet</button>
+      <button onClick={() => backendRequests.createDevice(props.address)}>createDevice</button>
     </div>
    )
 }

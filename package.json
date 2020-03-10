@@ -9,6 +9,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@waves/waves-transactions": "^3.25.0",
+    "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "crypto-random-string": "^3.1.0",
     "dotenv": "^8.2.0",

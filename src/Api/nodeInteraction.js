@@ -76,6 +76,7 @@ export const currentUser = async address => {
     wavesBalance = await nodeInteraction.balance(address, config.nodeUrl)
   }
   catch {
+    console.error(`Address was ${address}`)
     throw new Error('Connection error')
   }
 
