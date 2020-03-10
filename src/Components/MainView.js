@@ -81,6 +81,7 @@ const MainView = props => {
 
   return(
   <div className="MainViewContainer">
+    <div className="MainViewTitle">User Details</div>
     <div className="MainViewContent">
     {Windowdevice}
       {/* <div className='ButtonContainer'>

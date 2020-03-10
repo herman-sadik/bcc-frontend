@@ -20,6 +20,13 @@
     box-shadow: 10px 10px 10px grey;
 }
 
+.MainViewTitle{
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
 .MainViewDataContainer{
     width: 100%;
     justify-content: center;

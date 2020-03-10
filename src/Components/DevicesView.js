@@ -21,13 +21,14 @@ const DevicesView = props => {
 
     return (
     <div className="DeviceContainer">
+        <div className="DeviceTitle">DEVICES</div>
         <div className="DeviceAllBox">
-            <div className="DeviceLabels">
+            {devices.map(item => 
+            <div className="DevicesBox" key={item.address}>
+              <div className="DeviceLabels">
             <label>Address</label>
             <label>Price</label>
             </div>
-            {devices.map(item => 
-            <div className="DevicesBox" key={item.address}>
                 <div className="DivacesInfo">
                     <div onClick={() => reservationHandler(item.address)} style={{cursor: "pointer"}}>{item.address}</div>
                     <div>{item.price}</div>
