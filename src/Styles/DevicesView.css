@@ -20,6 +20,7 @@
     flex-direction: column;
     overflow: auto;
     align-items: center;
+    padding: 20px;
 }
 
 .DeviceLabels{
@@ -40,6 +41,7 @@
     width: 80%;
     height:200px;
     min-height: 200px;
+    max-width: 1000px;
     font-size: 1.2rem;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color:	#585858;
@@ -47,10 +49,6 @@
     border-radius: 15px;
     background: white;  
 
-}
-
-.DeviceAllBox>:last-child{
-    bottom: 20px
 }
 
 .DivacesInfo{

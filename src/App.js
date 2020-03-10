@@ -42,7 +42,7 @@ const  App = (props) => {
     setTimeout(fetchUser, 600)
   }, []) // eslint-disable-line
 
-  const DepositeHandler = async () => {
+  const DepositHandler = async () => {
     Swal.fire({
       title: 'How many BCC you want deposit',
       input: "number",
@@ -61,7 +61,7 @@ const  App = (props) => {
       'Device Name',
       'Device Price'
     ]).then(result => {
-      const [a,b] = result.value
+      const [_, b] = result.value
       withWavesKeeper(transactions.createDevice(b))
     }
     )
@@ -79,20 +79,20 @@ const  App = (props) => {
   const router = (
     <div>
       <NavBar balance={userInfo.deposit === null ? 0 : userInfo.deposit}/> 
-    <div className="App">
-      <SideBar
-        waves={userInfo.wavesBalance}
-        bbc={userInfo.bccBalance}
-        deposit={userInfo.deposit === null ? 0 : userInfo.deposit}
-        addDeposit={DepositeHandler}
-        userInfo = {userInfo.hasAccount}
-        onCreateAccount={() => withWavesKeeper(transactions.createAccount())}
-        onCreateDevice={createDeviceHandler}
-      /> 
-    <Switch>
-      {routesJSX}
-    </Switch>
-    </div>
+      <div className="App">
+        <SideBar
+          waves={userInfo.wavesBalance}
+          bbc={userInfo.bccBalance}
+          deposit={userInfo.deposit === null ? 0 : userInfo.deposit}
+          addDeposit={DepositHandler}
+          userInfo = {userInfo.hasAccount}
+          onCreateAccount={() => withWavesKeeper(transactions.createAccount())}
+          onCreateDevice={createDeviceHandler}
+        /> 
+        <Switch>
+          {routesJSX}
+        </Switch>
+      </div>
     </div>
   )
 
